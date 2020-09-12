@@ -1,0 +1,10 @@
+#centos1.dcloud.cisco.com
+#centos2.dcloud.cisco.com
+
+[aws]
+34.228.219.38
+
+[aws:vars]
+ansible_user=ubuntu
+ansible_ssh_private_key_file=/home/anirudh/ansible.pem
+

@@ -1,0 +1,9 @@
+---
+- name: Delete conf file in remote server
+  file:
+    path: /etc/nginx/conf.d/{{inventory_hostname}}.conf
+    state: absent
+- name: Delete index.html file in remote server
+  file:
+    path: /var/www/{{inventory_hostname}}/
+    state: absent

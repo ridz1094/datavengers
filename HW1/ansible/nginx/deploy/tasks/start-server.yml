@@ -1,0 +1,7 @@
+---
+- name: Start NGiNX
+  service:
+    name: nginx
+    state: started
+  notify:
+    - Reload nginx service

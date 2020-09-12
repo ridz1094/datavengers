@@ -1,0 +1,15 @@
+---
+- name: Insert the conf file on remote host
+  template:
+    src: ../files/nginx.conf.tpl
+    dest: /etc/nginx/conf.d/{{inventory_hostname}}.conf
+
+- name: Insert index.html file in the project directory
+  template:
+    src: index.html
+    dest: /var/www/{{inventory_hostname}}/html/
+    owner: root
+    group: root
+    mode: "0775"
+  notify :
+    - Reload nginx service

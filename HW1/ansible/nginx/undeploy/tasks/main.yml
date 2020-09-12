@@ -1,0 +1,3 @@
+- include: stop-server.yml
+- include: delete-files.yml
+- include: uninstall.yml

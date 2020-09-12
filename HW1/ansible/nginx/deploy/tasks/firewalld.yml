@@ -1,0 +1,10 @@
+---
+- name: Start firewalld
+  systemd: 
+    name: firewalld
+    state: started
+- name: Open port 8080 firewalld
+  firewalld:
+      port: '8080/tcp'
+      state: enabled
+      zone: public

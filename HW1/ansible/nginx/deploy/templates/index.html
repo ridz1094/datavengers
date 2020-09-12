@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<title>
+			{{ hostvars[inventory_hostname]['ansible_facts']['distribution'] }} home page
+		</title>
+		<style>
+			body {
+				background-color: #f1f1f1;
+				font-family: monospace;
+				padding: 30px;
+			}
+			div {
+				color: #555;
+			    font-size: 24px;
+			    background: #fff;
+			    border: 1px solid #ccc;
+			    padding: 10px;
+			    border-radius: 10px;
+			    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16);
+			    width: 50%;
+			}
+			h1 {
+				color: grey;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Ansible demo</h1>
+		<div>
+			<p> Hello World from {{inventory_hostname}} </p>
+		</div>
+	</body>
+</html>

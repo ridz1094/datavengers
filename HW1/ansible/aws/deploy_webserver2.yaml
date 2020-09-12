@@ -1,0 +1,54 @@
+---
+- name: playbook to deploy nginx webserver
+  hosts: aws
+  user: ububtu
+
+  tasks:
+  - name: Install Nginx
+    apt:
+     name: nginx
+     state: present
+     #sudo: yes
+
+  - name: add index.html file
+    template:
+     src: ./index.nginx-debian.html
+     dest: /var/www/html/index.nginx-debian.html
+
+  - name: UFW - allow HTTP on port
+    ufw:
+      rule: allow
+      port: '80'
+      proto: tcp
+  - name: ensure boto and boto3 are installed
+    pip:
+      name: 
+        - boto3
+        - botocore
+
+  - name: Start Nginx
+    service:
+      name: nginx
+      state: started
+
+  - name: change security group
+    ec2_group:
+      name: launch-wizard-1
+      description: http port 80
+      region: us-east-1
+      aws_secret_key: 'cV2sbC7GoLRa08Iz4EKqJocW1MPpWi1lWkHmE4eN'
+      aws_access_key: 'ASIA2FGHWPGQUH5YMPPO'
+      security_token: 'FwoGZXIvYXdzEPz//////////wEaDCDp+Tewm+pZK33hIyLHAfT9DifaChT5oQdq7vl4rm1RFj5dS7pHDDVPwItjYI+TgUFvEF+EWwK8qJqSMoPQSr+NomubkyG3fP6004I4W5QRV5vECDUq8RRyMCyTaMxna7qlGEnhTj2ILgTFtFV21w342DvemllX0nKAu8DxGyQd+3MgAEqXbZOvNlaQtwsWjHnnfShJYERjZ1JypZ9cLnk078NfhfbZ9HA5F3iC5IVjCfnhxy/B73iTxoL51O5IMR6VqGAkCyqgsigAoMSIBaiV86YJjlAoiIjR+gUyLezj5OByq5Nq6y58qdxZsZhjQ64RytGXdwNP4q794c04pWv3X0Gqwmji+FQmwA=='
+      vpc_id: vpc-2b52ad56
+      rules:
+        - proto: tcp
+          ports:
+          - 80
+          cidr_ip: 0.0.0.0/0
+          rule_desc: allow all on http 80
+        - proto: tcp
+          ports:
+          - 22
+          cidr_ip: 0.0.0.0/0
+          rule_desc: allow all on ssh 22
+
