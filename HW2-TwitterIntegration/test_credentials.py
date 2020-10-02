@@ -1,15 +1,10 @@
 #!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
+import os
 import tweepy as tw
 
 # Authenticate to Twitter
-auth = twy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_token_secret)
-
+auth = tw.OAuthHandler(os.environ.get('CONSUMER_KEY'), os.environ.get('CONSUMER_SECRET'))
+auth.set_access_token(os.environ.get('ACCESS_TOKEN'), os.environ.get('ACCESS_TOKEN_SECRET'))
 api = tw.API(auth)
 
 try:
