@@ -15,3 +15,10 @@ def display_tweets():
     tweets.append({"id": status_json.get('id'), "status": status_json.get('text'), "created_at": status_json.get('created_at')})
   return tweets
 
+def search_tweet(search_string):
+  tweets = []
+  for obj in get_api().search(search_string):
+    obj_json = obj._json
+    tweets.append({"id": obj_json.get('id'), "status": obj_json.get('text'), "created_at": obj_json.get('created_at')})
+  return tweets
+

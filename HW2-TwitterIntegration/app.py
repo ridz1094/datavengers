@@ -13,15 +13,22 @@ def home():
 def create():
   tweet_msg = request.json.get("message")
   post_tweet(tweet_msg)
-  return jsonify({"message": "Posted tweet on twitter."})
+  message = "Posted tweet on twitter."
+  return jsonify({"message": message})
 
 @app.route('/tweet/<id>', methods=["DELETE"])
 def delete(id):
   delete_tweet(id)
   return jsonify({"message": "Deleted tweet on twitter."})
 
-@app.route('/tweets', methods=["GET"])
+@app.route('/my_tweets', methods=["GET"])
 def show():
   result = display_tweets()
+  return jsonify({"data": result})
+
+@app.route('/tweets', methods=["GET"])
+def search():
+  search_string = request.args.get('query')
+  result = search_tweet(search_string)
   return jsonify({"data": result})
 
