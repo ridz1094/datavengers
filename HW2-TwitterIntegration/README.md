@@ -9,5 +9,5 @@ export CONSUMER_SECRET=ihfi2Axa00tLB7S7mrZ3DBKWg3XwP6me5kBHU4WO2hLgJHnM42
 export ACCESS_TOKEN=1309472982234849280-IAjX1txVzaNEq5mdXXPrYmg7gxAszm
 export ACCESS_TOKEN_SECRET=DMoAX5ou8eOhKyjSpeaMrAvxIbJvBGz1jYJvxx4631LBx
 
-export FLASK_APP=app.py
+export FLASK_APP=flask_app.py
 flask run
