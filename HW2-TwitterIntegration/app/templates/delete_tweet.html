@@ -1,0 +1,21 @@
+{% extends "template.html" %}
+{% block content %}
+    <div id="delete" class="tab-pane">
+        <div class="card">
+            <div class="form-group">
+                <form class="form-inline" method="GET" action="{{ url_for('delete_tweet') }}">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">Enter tweet id to delete a tweet</span>
+                  </div>
+                  <input type="text" class="form-control" name="id" placeholder="TweetId" >
+                  <input class="btn btn-primary submit-btn" type="submit" value="Delete">
+                </form>
+            </div>
+            {% if status == 'deleted' %}
+              <div class="alert alert-success message-box">
+                  <p>Tweet is deleted successfully!</p>
+              </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
