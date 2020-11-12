@@ -3,7 +3,7 @@ Twitter interface controller between the Flask app and the Twitter APIs.
 """
 from app import tweet_auth 
 import logging
-
+#Checking deployment
 # auth = tw.OAuthHandler(os.environ.get('CONSUMER_KEY'), os.environ.get('CONSUMER_SECRET'))
 # auth.set_access_token(os.environ.get('ACCESS_TOKEN'), os.environ.get('ACCESS_TOKEN_SECRET'))
 # api = tw.API(auth)
