@@ -11,3 +11,5 @@ export ACCESS_TOKEN_SECRET=DMoAX5ou8eOhKyjSpeaMrAvxIbJvBGz1jYJvxx4631LBx
 
 export FLASK_APP=flask_app.py
 flask run
+
+#Jenkins Deployment
