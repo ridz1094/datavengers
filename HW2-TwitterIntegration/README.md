@@ -1,5 +1,5 @@
 #Twitter Integration
-#Checking auto deploy
+#Checking auto deploy again
 Command to run application
 
 Set variable on local terminal or add it in environment variables
