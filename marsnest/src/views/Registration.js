@@ -4,7 +4,7 @@ import Registration from "../components/Registration";
 let history = useHistory();
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 
-export const RegistrationComponent = ({match, location}) => {
+export const RegistrationComponent = ({location}) => {
   const { loginWithRedirect } = useAuth0();
 
   return (
