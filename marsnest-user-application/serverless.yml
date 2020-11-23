@@ -35,8 +35,8 @@ functions:
   showUserApplications:
     handler: app.showUserApplications
     events:
-      - http: 'GET /users/{user_id}/user_applications'
+      - http: 'POST /user/user_applications'
   createUserApplication:
     handler: app.createUserApplication
     events:
-      - http: 'POST /users/{user_id}/user_applications'
+      - http: 'POST /user_applications'
