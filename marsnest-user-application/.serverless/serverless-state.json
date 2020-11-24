@@ -181,7 +181,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/marsnest-user-application/dev/1606074778341-2020-11-22T19:52:58.341Z/marsnest-user-application.zip"
+                "S3Key": "serverless/marsnest-user-application/dev/1606157743580-2020-11-23T18:55:43.580Z/marsnest-user-application.zip"
               },
               "FunctionName": "marsnest-user-application-dev-hello",
               "Handler": "app.hello",
@@ -205,14 +205,14 @@
               "HelloLogGroup"
             ]
           },
-          "HelloLambdaVersiongt33ezxeY8KB1G0cgkZsty3wXzRVjizAkKerngDks": {
+          "HelloLambdaVersion6uCNJKcr2stjIiRy3yi9vB8MsDayiudjxYuUe0mrU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HelloLambdaFunction"
               },
-              "CodeSha256": "Z+OBM7Q7BdTvAnTN1/at8m4/wFmY1JkJzuwzo6b1qM8="
+              "CodeSha256": "I+pJJESUmyNdj0JJ+3t/Q3serAJHMvZuSaZLXSNRS2w="
             }
           },
           "ShowAllApplicationsLambdaFunction": {
@@ -222,7 +222,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/marsnest-user-application/dev/1606074778341-2020-11-22T19:52:58.341Z/marsnest-user-application.zip"
+                "S3Key": "serverless/marsnest-user-application/dev/1606157743580-2020-11-23T18:55:43.580Z/marsnest-user-application.zip"
               },
               "FunctionName": "marsnest-user-application-dev-showAllApplications",
               "Handler": "app.showAllApplications",
@@ -246,14 +246,14 @@
               "ShowAllApplicationsLogGroup"
             ]
           },
-          "ShowAllApplicationsLambdaVersionU0S7uDXLZdB9lTo5acupzf95yrX8aTb6ZSRJrwB1JOc": {
+          "ShowAllApplicationsLambdaVersionwAsNJmyOkPaEMyKKwxd4WfIbJHqfcjCNxSj4OHE": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ShowAllApplicationsLambdaFunction"
               },
-              "CodeSha256": "Z+OBM7Q7BdTvAnTN1/at8m4/wFmY1JkJzuwzo6b1qM8="
+              "CodeSha256": "I+pJJESUmyNdj0JJ+3t/Q3serAJHMvZuSaZLXSNRS2w="
             }
           },
           "ShowUserApplicationsLambdaFunction": {
@@ -263,7 +263,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/marsnest-user-application/dev/1606074778341-2020-11-22T19:52:58.341Z/marsnest-user-application.zip"
+                "S3Key": "serverless/marsnest-user-application/dev/1606157743580-2020-11-23T18:55:43.580Z/marsnest-user-application.zip"
               },
               "FunctionName": "marsnest-user-application-dev-showUserApplications",
               "Handler": "app.showUserApplications",
@@ -287,14 +287,14 @@
               "ShowUserApplicationsLogGroup"
             ]
           },
-          "ShowUserApplicationsLambdaVersioninrQdKM4dcyRoynJ36dwLm5hFctsdCrC67oo6Qf8": {
+          "ShowUserApplicationsLambdaVersionEOHfBr03lYQfQz6oesPUJiZ4PxIAGBLnaw3KdbQmr8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ShowUserApplicationsLambdaFunction"
               },
-              "CodeSha256": "Z+OBM7Q7BdTvAnTN1/at8m4/wFmY1JkJzuwzo6b1qM8="
+              "CodeSha256": "I+pJJESUmyNdj0JJ+3t/Q3serAJHMvZuSaZLXSNRS2w="
             }
           },
           "CreateUserApplicationLambdaFunction": {
@@ -304,7 +304,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/marsnest-user-application/dev/1606074778341-2020-11-22T19:52:58.341Z/marsnest-user-application.zip"
+                "S3Key": "serverless/marsnest-user-application/dev/1606157743580-2020-11-23T18:55:43.580Z/marsnest-user-application.zip"
               },
               "FunctionName": "marsnest-user-application-dev-createUserApplication",
               "Handler": "app.createUserApplication",
@@ -328,14 +328,14 @@
               "CreateUserApplicationLogGroup"
             ]
           },
-          "CreateUserApplicationLambdaVersionMhjURB8Wk5MgWHbK2EKg6IhTBSRWkzdbaMfLhiws0rY": {
+          "CreateUserApplicationLambdaVersionb84H0x0aGkj3qzfaEJIhQFgX7d8SmIVuvbFOAjuCU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateUserApplicationLambdaFunction"
               },
-              "CodeSha256": "Z+OBM7Q7BdTvAnTN1/at8m4/wFmY1JkJzuwzo6b1qM8="
+              "CodeSha256": "I+pJJESUmyNdj0JJ+3t/Q3serAJHMvZuSaZLXSNRS2w="
             }
           },
           "ApiGatewayRestApi": {
@@ -365,7 +365,7 @@
               }
             }
           },
-          "ApiGatewayResourceUsers": {
+          "ApiGatewayResourceUser": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
               "ParentId": {
@@ -374,29 +374,17 @@
                   "RootResourceId"
                 ]
               },
-              "PathPart": "users",
+              "PathPart": "user",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
             }
           },
-          "ApiGatewayResourceUsersUseridVar": {
+          "ApiGatewayResourceUserUserapplications": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
               "ParentId": {
-                "Ref": "ApiGatewayResourceUsers"
-              },
-              "PathPart": "{user_id}",
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              }
-            }
-          },
-          "ApiGatewayResourceUsersUseridVarUserapplications": {
-            "Type": "AWS::ApiGateway::Resource",
-            "Properties": {
-              "ParentId": {
-                "Ref": "ApiGatewayResourceUsersUseridVar"
+                "Ref": "ApiGatewayResourceUser"
               },
               "PathPart": "user_applications",
               "RestApiId": {
@@ -493,13 +481,13 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayMethodUsersUseridVarUserapplicationsGet": {
+          "ApiGatewayMethodUserUserapplicationsPost": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
-              "HttpMethod": "GET",
+              "HttpMethod": "POST",
               "RequestParameters": {},
               "ResourceId": {
-                "Ref": "ApiGatewayResourceUsersUseridVarUserapplications"
+                "Ref": "ApiGatewayResourceUserUserapplications"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -536,13 +524,13 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayMethodUsersUseridVarUserapplicationsPost": {
+          "ApiGatewayMethodUserapplicationsPost": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "HttpMethod": "POST",
               "RequestParameters": {},
               "ResourceId": {
-                "Ref": "ApiGatewayResourceUsersUseridVarUserapplications"
+                "Ref": "ApiGatewayResourceUserapplications"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -579,7 +567,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1606074773926": {
+          "ApiGatewayDeployment1606157737494": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -590,8 +578,8 @@
             "DependsOn": [
               "ApiGatewayMethodGet",
               "ApiGatewayMethodUserapplicationsGet",
-              "ApiGatewayMethodUsersUseridVarUserapplicationsGet",
-              "ApiGatewayMethodUsersUseridVarUserapplicationsPost"
+              "ApiGatewayMethodUserUserapplicationsPost",
+              "ApiGatewayMethodUserapplicationsPost"
             ]
           },
           "HelloLambdaPermissionApiGateway": {
@@ -752,25 +740,25 @@
           "HelloLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HelloLambdaVersiongt33ezxeY8KB1G0cgkZsty3wXzRVjizAkKerngDks"
+              "Ref": "HelloLambdaVersion6uCNJKcr2stjIiRy3yi9vB8MsDayiudjxYuUe0mrU"
             }
           },
           "ShowAllApplicationsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ShowAllApplicationsLambdaVersionU0S7uDXLZdB9lTo5acupzf95yrX8aTb6ZSRJrwB1JOc"
+              "Ref": "ShowAllApplicationsLambdaVersionwAsNJmyOkPaEMyKKwxd4WfIbJHqfcjCNxSj4OHE"
             }
           },
           "ShowUserApplicationsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ShowUserApplicationsLambdaVersioninrQdKM4dcyRoynJ36dwLm5hFctsdCrC67oo6Qf8"
+              "Ref": "ShowUserApplicationsLambdaVersionEOHfBr03lYQfQz6oesPUJiZ4PxIAGBLnaw3KdbQmr8"
             }
           },
           "CreateUserApplicationLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateUserApplicationLambdaVersionMhjURB8Wk5MgWHbK2EKg6IhTBSRWkzdbaMfLhiws0rY"
+              "Ref": "CreateUserApplicationLambdaVersionb84H0x0aGkj3qzfaEJIhQFgX7d8SmIVuvbFOAjuCU"
             }
           },
           "ServiceEndpoint": {
@@ -895,7 +883,7 @@
         "timeout": 6,
         "runtime": "python3.6",
         "vpc": {},
-        "versionLogicalId": "HelloLambdaVersiongt33ezxeY8KB1G0cgkZsty3wXzRVjizAkKerngDks"
+        "versionLogicalId": "HelloLambdaVersion6uCNJKcr2stjIiRy3yi9vB8MsDayiudjxYuUe0mrU"
       },
       "showAllApplications": {
         "handler": "app.showAllApplications",
@@ -910,13 +898,13 @@
         "timeout": 6,
         "runtime": "python3.6",
         "vpc": {},
-        "versionLogicalId": "ShowAllApplicationsLambdaVersionU0S7uDXLZdB9lTo5acupzf95yrX8aTb6ZSRJrwB1JOc"
+        "versionLogicalId": "ShowAllApplicationsLambdaVersionwAsNJmyOkPaEMyKKwxd4WfIbJHqfcjCNxSj4OHE"
       },
       "showUserApplications": {
         "handler": "app.showUserApplications",
         "events": [
           {
-            "http": "GET /users/{user_id}/user_applications"
+            "http": "POST /user/user_applications"
           }
         ],
         "name": "marsnest-user-application-dev-showUserApplications",
@@ -925,13 +913,13 @@
         "timeout": 6,
         "runtime": "python3.6",
         "vpc": {},
-        "versionLogicalId": "ShowUserApplicationsLambdaVersioninrQdKM4dcyRoynJ36dwLm5hFctsdCrC67oo6Qf8"
+        "versionLogicalId": "ShowUserApplicationsLambdaVersionEOHfBr03lYQfQz6oesPUJiZ4PxIAGBLnaw3KdbQmr8"
       },
       "createUserApplication": {
         "handler": "app.createUserApplication",
         "events": [
           {
-            "http": "POST /users/{user_id}/user_applications"
+            "http": "POST /user_applications"
           }
         ],
         "name": "marsnest-user-application-dev-createUserApplication",
@@ -940,7 +928,7 @@
         "timeout": 6,
         "runtime": "python3.6",
         "vpc": {},
-        "versionLogicalId": "CreateUserApplicationLambdaVersionMhjURB8Wk5MgWHbK2EKg6IhTBSRWkzdbaMfLhiws0rY"
+        "versionLogicalId": "CreateUserApplicationLambdaVersionb84H0x0aGkj3qzfaEJIhQFgX7d8SmIVuvbFOAjuCU"
       }
     },
     "configValidationMode": "warn",
@@ -967,7 +955,7 @@
     "artifact": "/Users/riddhij/Desktop/msse/projects/cmpe-272/user-application/.serverless/marsnest-user-application.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/marsnest-user-application/dev/1606074778341-2020-11-22T19:52:58.341Z",
+    "artifactDirectoryName": "serverless/marsnest-user-application/dev/1606157743580-2020-11-23T18:55:43.580Z",
     "artifact": "marsnest-user-application.zip"
   }
 }

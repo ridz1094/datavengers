@@ -5,6 +5,7 @@ from datetime import date
 import sys
 import logging
 import psycopg2
+import helper
 
 #rds settings
 rds_host  = 'marsnest.cqjxjq7sdnq5.us-east-1.rds.amazonaws.com'
@@ -18,9 +19,9 @@ logger.setLevel(logging.INFO)
 try:
   connection = psycopg2.connect(host = rds_host, port = 5432, user = name, password = password)
   cursor=connection.cursor()
-except pymysql.MySQLError as e:
+except:
     logger.error("ERROR: Unexpected error: Could not connect to MySQL instance.")
-    logger.error(e)
+    # logger.error(e)
     sys.exit()
 
 logger.info("SUCCESS: Connection to RDS MySQL instance succeeded")
@@ -58,22 +59,26 @@ def create_user_applicaitons(user_application):
 
 def show_user_applications(user_id):
   response = "Null"
+  results = []
   with connection.cursor() as cur:
     print("Select Query")
-    query = f"SELECT * FROM user_applications WHERE user_id = {user_id}"
+    query = f"SELECT id, user_id, uin, height, weight, blood_group, diseases, about, qualication, status, start_date, end_date, created_at FROM user_applications WHERE user_id = {user_id}"
     cur.execute(query)
     response = cur.fetchall()
+    results = helper.format_response(response)
   connection.commit()
-  return response
+  return results
 
 def show_all_applications():
   response = "Null"
+  results = []
   with connection.cursor() as cur:
     print("Select Query")
-    query = f"SELECT * FROM user_applications"
+    query = f"SELECT id, user_id, uin, height, weight, blood_group, diseases, about, qualication, status, start_date, end_date, created_at FROM user_applications"
     cur.execute(query)
     response = cur.fetchall()
+    results = helper.format_response(response)
   connection.commit()
-  return response
+  return results
 
 
