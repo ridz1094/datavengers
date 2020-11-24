@@ -19,9 +19,9 @@ logger.setLevel(logging.INFO)
 try:
   connection = psycopg2.connect(host = rds_host, port = 5432, user = name, password = password)
   cursor=connection.cursor()
-except pymysql.MySQLError as e:
+except:
     logger.error("ERROR: Unexpected error: Could not connect to MySQL instance.")
-    logger.error(e)
+    # logger.error(e)
     sys.exit()
 
 logger.info("SUCCESS: Connection to RDS MySQL instance succeeded")
