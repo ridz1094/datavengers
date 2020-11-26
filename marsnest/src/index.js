@@ -6,6 +6,20 @@ import * as serviceWorker from "./serviceWorker";
 import { Auth0Provider } from "@auth0/auth0-react";
 import config from "./auth_config.json";
 import history from "./utils/history";
+import { Amplify } from 'aws-amplify';
+import awsconfig from './config';
+
+Amplify.configure({
+  API: {
+    endpoints: [
+      {
+        name: "message",
+        endpoint: awsconfig.apiGateway.URL,
+        region: awsconfig.apiGateway.REGION
+      },
+    ]
+  }
+});
 
 const onRedirectCallback = (appState) => {
   history.push(

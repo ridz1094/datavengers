@@ -11,6 +11,7 @@ import Message from "./views/Message";
 import { useAuth0 } from "@auth0/auth0-react";
 import history from "./utils/history";
 
+
 // styles
 import "./App.css";
 
@@ -31,7 +32,7 @@ const App = () => {
 
   return (
     <Router history={history}>
-      <div id="app" className="d-flex flex-column h-100">
+      <div id="app" className="d-flex flex-column h-100 App">
         <NavBar />
         <Container className="flex-grow-1 mt-5">
           <Switch>
@@ -39,6 +40,8 @@ const App = () => {
             <Route path="/profile" component={Profile} />
             <Route path="/message" component={Message} />
             <Route path="/register" component={Registration} />
+            <Route path="/inbox" component={Message} />
+            <Route path="/compose" component={Message} />
           </Switch>
         </Container>
       </div>
