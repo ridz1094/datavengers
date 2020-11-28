@@ -65,6 +65,30 @@ const NavBar = () => {
                   </NavLink>
                 </NavItem>
               )}
+              {isAuthenticated && (
+                <NavItem>
+                  <NavLink
+                    tag={RouterNavLink}
+                    to="/admindash"
+                    exact
+                    activeClassName="router-link-exact-active"
+                  >
+                    Admin Dashboard
+                  </NavLink>
+                </NavItem>
+              )}
+              {isAuthenticated && (
+                <NavItem>
+                  <NavLink
+                    tag={RouterNavLink}
+                    to="/tweet"
+                    exact
+                    activeClassName="router-link-exact-active"
+                  >
+                    Tweet your journey!
+                  </NavLink>
+                </NavItem>
+              )}
             </Nav>
             <Nav className="d-none d-md-block" navbar>
               {!isAuthenticated && (

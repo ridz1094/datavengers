@@ -7,15 +7,28 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import config from "./auth_config.json";
 import history from "./utils/history";
 import { Amplify } from 'aws-amplify';
-import awsconfig from './config';
+import base_config from './base_config';
+import application_config from './application_config';
+import twitter_config from './twitter_config';
+
 
 Amplify.configure({
   API: {
     endpoints: [
       {
         name: "message",
-        endpoint: awsconfig.apiGateway.URL,
-        region: awsconfig.apiGateway.REGION
+        endpoint: base_config.apiGateway.URL,
+        region: base_config.apiGateway.REGION
+      },
+      {
+        name: "application",
+        endpoint: application_config.apiGateway.URL,
+        region: application_config.apiGateway.REGION
+      },
+      {
+        name: "twitter",
+        endpoint: twitter_config.apiGateway.URL,
+        region: twitter_config.apiGateway.REGION
       },
     ]
   }

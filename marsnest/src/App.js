@@ -5,12 +5,13 @@ import { Container } from "reactstrap";
 import Loading from "./components/Loading";
 import NavBar from "./components/NavBar";
 import Registration from "./components/Registration";
+import AdminDashboard from "./components/AdminDashboard";
 import Home from "./views/Home";
 import Profile from "./views/Profile";
 import Message from "./views/Message";
 import { useAuth0 } from "@auth0/auth0-react";
 import history from "./utils/history";
-
+import Tweet from "./components/Tweet"
 
 // styles
 import "./App.css";
@@ -42,6 +43,8 @@ const App = () => {
             <Route path="/register" component={Registration} />
             <Route path="/inbox" component={Message} />
             <Route path="/compose" component={Message} />
+            <Route path="/admindash" component={AdminDashboard} />
+            <Route path="/tweet" component={Tweet}/>
           </Switch>
         </Container>
       </div>

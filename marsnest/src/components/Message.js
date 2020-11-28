@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./Message.css";
 import ComposeMail from "./ComposeMail"
 import Inbox from "./Inbox"
+import Loading from "./Loading";
+
 import {
   BrowserRouter,
   Route,
@@ -12,13 +14,15 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { API } from "aws-amplify";
 
 const Message = () => {
-
+  
+  const [isLoading, setLoading] = useState(true);
   const [msgs, setMsgs] = useState([]);
 
   const fetchData = async () => {
-    API.get('message', '/messages?user_id=99')
+     API.get('message', '/messages?user_id=99')
       .then(response => {
         setMsgs(response);
+        setLoading(false);
       })
       .catch(error => {
         console.log(error.response);
@@ -28,6 +32,10 @@ const Message = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <BrowserRouter>
@@ -57,7 +65,6 @@ const Message = () => {
               <Inbox msgs={msgs}/>
             </Route> 
             <Route path="/compose" component={ComposeMail} />
-            
           </div>
       </div>
     </BrowserRouter>
