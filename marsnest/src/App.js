@@ -6,6 +6,7 @@ import Loading from "./components/Loading";
 import NavBar from "./components/NavBar";
 import Registration from "./components/Registration";
 import AdminDashboard from "./components/AdminDashboard";
+import UserDashboard from "./components/UserDashboard";
 import Home from "./views/Home";
 import Profile from "./views/Profile";
 import Message from "./views/Message";
@@ -44,6 +45,7 @@ const App = () => {
             <Route path="/inbox" component={Message} />
             <Route path="/compose" component={Message} />
             <Route path="/admindash" component={AdminDashboard} />
+            <Route path="/userdash" component={UserDashboard} />
             <Route path="/tweet" component={Tweet}/>
           </Switch>
         </Container>

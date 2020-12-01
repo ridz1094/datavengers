@@ -81,6 +81,18 @@ const NavBar = () => {
                 <NavItem>
                   <NavLink
                     tag={RouterNavLink}
+                    to="/userdash"
+                    exact
+                    activeClassName="router-link-exact-active"
+                  >
+                    My Application
+                  </NavLink>
+                </NavItem>
+              )}
+              {isAuthenticated && (
+                <NavItem>
+                  <NavLink
+                    tag={RouterNavLink}
                     to="/tweet"
                     exact
                     activeClassName="router-link-exact-active"
@@ -88,7 +100,7 @@ const NavBar = () => {
                     Tweet your journey!
                   </NavLink>
                 </NavItem>
-              )}
+              )}   
             </Nav>
             <Nav className="d-none d-md-block" navbar>
               {!isAuthenticated && (
