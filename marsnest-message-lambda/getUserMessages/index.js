@@ -24,7 +24,7 @@ exports.handler = async (event, context) => {
         //     console.log(" -", item.year + ": " + item.title);
         //});
 
-        const messages = data.Items.filter(d => d.receiver_id == "99")
+        const messages = data.Items.filter(d => d.receiver_id == user_id)
 
         responseBody = JSON.stringify(messages);
         statusCode = 201;

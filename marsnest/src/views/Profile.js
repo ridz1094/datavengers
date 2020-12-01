@@ -44,13 +44,13 @@ export const ProfileComponent = () => {
                   <div className="col-md-6">
                       <div className="form-group">
                           <label htmlFor="nickname">Nick Name</label>
-                          <input className="form-control" type="text" id="nickname" value={user.nickname} />
+                          <input className="form-control" type="text" id="nickname" value={user.nickname} readonly/>
                       </div>
                   </div>
                   <div className="col-md-6">
                       <div className="form-group">
                           <label htmlFor="email">E-mail Address</label>
-                          <input className="form-control" type="email" id="email" value={user.email} disabled=""/>
+                          <input className="form-control" type="email" id="email" value={user.email} disabled="" readonly/>
                       </div>
                   </div>
                   <div className="col-md-6">
@@ -59,25 +59,12 @@ export const ProfileComponent = () => {
                           <input className="form-control" type="text" id="phoneno" value="" />
                       </div>
                   </div>
-                  <div className="col-md-6">
-                      <div className="form-group">
-                          <label htmlFor="password">New Password</label>
-                          <input className="form-control" type="password" id="password"/>
-                      </div>
-                  </div>
-                  <div className="col-md-6">
-                      <div className="form-group">
-                          <label htmlFor="confirmpassword">Confirm Password</label>
-                          <input className="form-control" type="password" id="confirmpassword"/>
-                      </div>
-                  </div>
                   <div className="col-12">
                       <hr className="mt-2 mb-3"/>
                       <div className="d-flex flex-wrap justify-content-between align-items-center">
                           <div className="custom-control custom-checkbox d-block">
                               
                           </div>
-                          <button className="btn btn-style-1 btn-primary" type="button" data-toast="" data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Update Profile</button>
                       </div>
                   </div>
               </form>
