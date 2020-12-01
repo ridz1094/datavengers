@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Message.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { API } from "aws-amplify";
+import { v4 as uuidv4 } from 'uuid';
 
 
 const ComposeMail = () => {
@@ -9,6 +10,7 @@ const ComposeMail = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isSent, setIsSent] = useState(false)
     const [email, setEmail] = useState('')
+    const [subject, setSubject] = useState('')
     const [content, setContent] = useState('')
 
     const submit = e => {
@@ -17,9 +19,10 @@ const ComposeMail = () => {
         try {
             API.post("message", "/messages", {
                 body: {
-                    id: "7",
-                    sender_id: "91",
-                    receiver_id: "99",
+                    id: uuidv4(),
+                    sender_id: user.email,
+                    receiver_id: email,
+                    subject: subject,
                     message: content
                 }
               }).then(() => setIsSent(true))
@@ -43,6 +46,16 @@ const ComposeMail = () => {
                         placeholder="Type email"/>
                 </div>
             </div>
+
+            <div className="form-row mb-3">
+                <label htmlFor="to" className="col-2 col-sm-1 col-form-label">Subject:</label>
+                <div className="col-10 col-sm-11">
+                    <input type="subject" value={subject} 
+                        onChange={e => setSubject(e.target.value)} 
+                        className="form-control" id="subject" 
+                        placeholder="Type Subject"/>
+                </div>
+            </div>
        
             <div className="row">
                 <div className="col-sm-11 ml-auto">
@@ -56,7 +69,6 @@ const ComposeMail = () => {
                     </div>
                     <div className="form-group">
                         <button type="submit" className="btn btn-success">Send</button>
-                        <button type="submit" className="btn btn-danger">Discard</button>
                     </div>
                 </div>
             </div>

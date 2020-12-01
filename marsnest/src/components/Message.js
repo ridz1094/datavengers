@@ -15,11 +15,13 @@ import { API } from "aws-amplify";
 
 const Message = () => {
   
+  const { user } = useAuth0();
   const [isLoading, setLoading] = useState(true);
   const [msgs, setMsgs] = useState([]);
 
   const fetchData = async () => {
-     API.get('message', '/messages?user_id=99')
+    var url = "/messages?user_id=" + user.email;
+     API.get('message', url)
       .then(response => {
         setMsgs(response);
         setLoading(false);
@@ -42,7 +44,7 @@ const Message = () => {
       <div className="email-app row">
         <div className="col-lg-3 pb-5">
         <nav>
-            <Link to="/compose" className="btn btn-danger btn-block"><i className="fa fa-rocket"></i> New Email</Link>
+            <Link to="/compose" className="btn btn-danger btn-block"><i className="fa fa-rocket"></i> New Message</Link>
             <ul className="nav">
                 <li className="nav-item">
                     <Link to="/inbox" className="nav-link">

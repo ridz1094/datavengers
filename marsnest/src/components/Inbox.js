@@ -7,8 +7,8 @@ const Inbox = ({msgs}) => (
             <br/>
             <div className="list-group-item list-group-item-action">
                 <div className="d-flex w-100 justify-content-between">
-                <h5 className="mb-1">Subject</h5>
-                <small>3 days ago</small>
+                <h5 className="mb-1">{msg.subject}</h5>
+                <small>{msg.sent_date}</small>
                 </div>
                 <p className="mb-1">{msg.message}</p>
                 <small>{msg.sender_id}</small>
