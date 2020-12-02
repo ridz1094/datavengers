@@ -43,7 +43,7 @@ const AdminDashboard = () => {
                             </div>
                             <div className="media-body">
                                 <div className="mb-2">
-                                    <span className="fs-20 pr-16">Jon Doe</span>
+                                    <span className="fs-20 pr-16">{application.user_name}</span>
                                 </div>
                                 <small className="fs-16 fw-300 ls-1">{application.qualification}</small>
                             </div>

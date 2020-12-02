@@ -1,6 +1,6 @@
 # serverless.yml
 
-service: marsnest-user-application
+service: marsnest-user-application-api
 
 plugins:
   - serverless-python-requirements
@@ -24,8 +24,8 @@ provider:
   
 
 functions:
-  hello:
-    handler: app.hello
+  main:
+    handler: app.main
     events:
       - http: 'GET /'
   showAllApplications:
@@ -35,8 +35,29 @@ functions:
   showUserApplications:
     handler: app.showUserApplications
     events:
-      - http: 'POST /user/user_applications'
+      - http: 'GET /user/user_applications'
   createUserApplication:
     handler: app.createUserApplication
     events:
       - http: 'POST /user_applications'
+  getUserApplication:
+    handler: app.getUserApplication
+    events:
+      - http: 'GET /user_application'
+  createUser:
+    handler: app.createUser
+    events:
+      - http: 'POST /users'
+  getUserById:
+    handler: app.getUserById
+    events:
+      - http: 'GET /users/id'
+  getUserByEmail:
+    handler: app.getUserByEmail
+    events:
+      - http: 'GET /users/email'
+  updateUser:
+    handler: app.updateUser
+    events:
+      - http: 'PUT /users'
+  

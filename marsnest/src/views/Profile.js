@@ -1,11 +1,33 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Container, Row, Col } from "reactstrap";
 
 import Loading from "../components/Loading";
+import { API } from "aws-amplify";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 
 export const ProfileComponent = () => {
   const { user } = useAuth0();
+  const [userFromSys, setuser] = useState([]);
+  const [isLoading, setLoading] = useState(true);
+  // const [currentUser, setUser] = useState({});
+  const fetchData = async () => {
+    var url = "/users/email?email=" + user.email;
+    API.get('application', url)
+    .then(response => {
+        setuser(response.data);
+        setLoading(false);
+    })
+    .catch(error => {
+        console.log(error.response);
+    });
+}
+useEffect(() => {
+  fetchData();
+}, []);
+
+if (isLoading) {
+  return <Loading />;
+}
 
   return (
       <Container className="mb-5">
@@ -18,8 +40,8 @@ export const ProfileComponent = () => {
             />
           </Col>
           <Col md>
-            <h2>{user.nickname}</h2>
-            <p className="lead text-muted">{user.name}</p>
+            <h2>{userFromSys.name}</h2>
+            <p className="lead text-muted">{userFromSys.name}</p>
           </Col>
         </Row>
         <Row>     
@@ -35,28 +57,22 @@ export const ProfileComponent = () => {
           </div>
           <div className="col-lg-8 pb-5">
               <form className="row">
-                  <div className="col-md-6">
+                  <div className="col-md-12">
                       <div className="form-group">
-                          <label htmlFor="username">Name</label>
-                          <input className="form-control" type="text" id="username" value={user.name} />
+                          <label htmlFor="email"><b>E-mail Address</b></label>
+                          <input className="form-control" type="email" id="email" value={userFromSys.email} disabled="" readonly/>
                       </div>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-md-12">
                       <div className="form-group">
-                          <label htmlFor="nickname">Nick Name</label>
-                          <input className="form-control" type="text" id="nickname" value={user.nickname} readonly/>
+                          <label htmlFor="phoneno" ><b>Mobile Number</b></label>
+                          <input className="form-control" type="text" id="phoneno" value={userFromSys.mobile} disabled="" readonly/>
                       </div>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-md-12">
                       <div className="form-group">
-                          <label htmlFor="email">E-mail Address</label>
-                          <input className="form-control" type="email" id="email" value={user.email} disabled="" readonly/>
-                      </div>
-                  </div>
-                  <div className="col-md-6">
-                      <div className="form-group">
-                          <label htmlFor="phoneno">Phone Number</label>
-                          <input className="form-control" type="text" id="phoneno" value="" />
+                          <label htmlFor="phoneno" ><b>Date Of Birth</b></label>
+                          <input className="form-control" type="text" id="dob" value={userFromSys.dob} disabled="" readonly/>
                       </div>
                   </div>
                   <div className="col-12">
