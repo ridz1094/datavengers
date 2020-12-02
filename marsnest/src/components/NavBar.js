@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink as RouterNavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { API } from "aws-amplify";
 
 import {
   Collapse,
@@ -22,12 +23,27 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [userFromSys, setUserFromSys] = useState([]);
+  const [isUserFromSys, setIsUserFromSys] = useState(false);
   const {
     user,
     isAuthenticated,
     loginWithRedirect,
     logout,
   } = useAuth0();
+
+  //Logged in user information
+  if(isAuthenticated && !isUserFromSys){
+    var url = "/users/email?email=" + user.email;
+    API.get('application', url)
+    .then(response => {
+      setUserFromSys(response.data);
+      setIsUserFromSys(true)
+    })
+    .catch(error => {
+      console.log(error.response);
+    });
+  }
   const toggle = () => setIsOpen(!isOpen);
 
   const logoutWithRedirect = () =>
@@ -65,7 +81,7 @@ const NavBar = () => {
                   </NavLink>
                 </NavItem>
               )}
-              {isAuthenticated && (
+              {isAuthenticated && userFromSys.role == 'admin' && (
                 <NavItem>
                   <NavLink
                     tag={RouterNavLink}
