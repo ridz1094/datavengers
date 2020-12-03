@@ -26,8 +26,8 @@ const Tweet = () => {
     e.preventDefault()
     setIsLoading(true);
     try {
-        API.post("twitter", "tweet/post", {
-            body: {
+        API.get("twitter", "tweet/post", {
+            queryStringParameters: {
                 message: content
             }
           }).then(() => {
@@ -50,8 +50,8 @@ const Tweet = () => {
   }
 
   return (
-    <div className="row">
-        <div className=" col-md-6 col-xs-12 col-md-offset-3">
+    <div className="row d-flex justify-content-center">
+        <div className=" col-md-8 col-xs-12 col-md-offset-3">
             <div className="panel">
                 <div className="panel-heading">
                 </div>

@@ -5,7 +5,7 @@ import './Application.css'
 import { API } from "aws-amplify";
 import history from "../utils/history";
 
-const Application = (props) => {
+const Application = () => {
   const {userAuth} = useAuth0(),
   [isLoading, setIsLoading] = useState(false),
   [isSubmitted, setIsSubmitted] = useState(false),
@@ -17,19 +17,18 @@ const Application = (props) => {
   [endDate, setEndDate] = useState(''),
   [address, setAddress] = useState(''),
   {user} = history.location.state;
-  console.log(history.location.state);
-  console.log(user);
+
   const submit = (e) => {
-    API.post('application', 'user_applications',{
-      body: {
-      user_id: user.id,
-      uin: uin,
-      qualification: qualification,
-      about: about,
-      blood_group: bloodGroup,
-      start_date: startDate,
-      end_date: endDate,
-      address: address
+    API.get('application', 'user_application/create',{
+      queryStringParameters: {
+        user_id: user.id,
+        uin: uin,
+        qualification: qualification,
+        about: about,
+        blood_group: bloodGroup,
+        start_date: startDate,
+        end_date: endDate,
+        address: address
       }
     }).then(response => {
         setIsLoading(false);
@@ -53,8 +52,6 @@ const Application = (props) => {
                             <br/>
                             You can track the status of application here once lodged.
                         </div>
-
-
                     </div>
                     
                     <div className="col-lg-10 form-wrapper p-5 order-lg-2 ">
@@ -127,15 +124,36 @@ const Application = (props) => {
                                         <input type="text" className="form-control" id="edate" name="edate" placeholder="Date" value={endDate} onChange={e => { setEndDate(e.target.value);}}/>
                                     </div>
                                 </div>
+
+                                <div className="col-sm-4 mb-3">
+                                    <div className="form-group">
+                                        <label htmlFor="height">Height</label>
+                                        <input type="number" className="form-control" id="height" name="height" placeholder="Height"/>
+                                    </div>
+                                </div>
+
+                                <div className="col-sm-4 mb-3">
+                                    <div className="form-group">
+                                        <label htmlFor="weight">Weight</label>
+                                        <input type="number" className="form-control" id="weight" name="weight" placeholder="Weight"/>
+                                    </div>
+                                </div>
+
+                                <div className="col-sm-4 mb-3">
+                                    <div className="form-group">
+                                        <label htmlFor="health">Health conditions</label>
+                                        <input type="text" className="form-control" id="health" name="health" placeholder="Health condition"/>
+                                    </div>
+                                </div>
             
                                 <div className="col-sm-12 mb-3">
                                     <div className="form-group">
                                         <label className="required-field" htmlFor="aboutme">About me</label>
-                                        <textarea className="form-control" id="aboutme" name="aboutme" rows="4" placeholder="About me" value={about} onChange={e => { setAbout(e.target.value);}}></textarea>
+                                        <textarea className="form-control" id="aboutme" name="aboutme" rows="2" placeholder="About me" value={about} onChange={e => { setAbout(e.target.value);}}></textarea>
                                     </div>
                                 </div>
                                 <div className="col-sm-12 mb-3">
-                                    <button type="submit" name="submit" className="btn btn-primary">Submit</button>
+                                    <button type="submit" name="submit" className="btn btn-primary btn-lg view-app">Submit</button>
                                 </div>
             
                             </div>

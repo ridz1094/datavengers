@@ -44,7 +44,7 @@ const Message = () => {
       <div className="email-app row">
         <div className="col-lg-3 pb-5">
         <nav>
-            <Link to="/compose" className="btn btn-danger btn-block"><i className="fa fa-rocket"></i> New Message</Link>
+            <Link to="/compose" className="btn btn-info btn-block"><i className="fa fa-rocket"></i> New Message</Link>
             <ul className="nav">
                 <li className="nav-item">
                     <Link to="/inbox" className="nav-link">
