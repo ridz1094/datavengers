@@ -50,7 +50,7 @@ const NavBar = () => {
     logout({
       returnTo: window.location.origin,
     });
-
+  // && userFromSys.role == 'admin' &&
   return (
     <div className="nav-container">
       <Navbar color="light" light expand="md">
@@ -97,7 +97,7 @@ const NavBar = () => {
                 <NavItem>
                   <NavLink
                     tag={RouterNavLink}
-                    to="/userdash"
+                    to= {{pathname: "/userdash", state: {user: userFromSys}}}
                     exact
                     activeClassName="router-link-exact-active"
                   >
