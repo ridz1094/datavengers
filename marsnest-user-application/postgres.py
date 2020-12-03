@@ -49,6 +49,10 @@ def create_user_applicaitons(user_application_obj):
   with connection.cursor() as cur:
     print("Execute Query")
     query = "INSERT INTO user_applications (user_id, uin, height, weight, blood_group, diseases, about, qualification, status, start_date, end_date, address_text, country, city, state, pincode, created_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    print("---------")
+    print(user_application_obj)
+    print("---------")
+    print(query)
     cur.execute(query, (user_application_obj.get('user_id'), user_application_obj.get('uin'), user_application_obj.get('height'), user_application_obj.get('weight'), user_application_obj.get('blood_group'), user_application_obj.get('diseases'), user_application_obj.get('about'), user_application_obj.get('qualification'), user_application_obj.get('status'), user_application_obj.get('start_date'),user_application_obj.get('end_date'),user_application_obj.get('address_text'),user_application_obj.get('country'),user_application_obj.get('city'),user_application_obj.get('state'),user_application_obj.get('pincode'),user_application_obj.get('created_at')))
     print("---------")
     print(query)
@@ -61,7 +65,7 @@ def show_user_applications(user_id):
   results = []
   with connection.cursor() as cur:
     print("Select Query")
-    query = f"SELECT user_applications.id, user_id, uin, height, weight, blood_group, diseases, about, qualification, status, start_date, end_date, user_applications.created_at, name as user_name, email as user_email, dob as user_dob FROM user_applications JOIN users ON user_id = users.id WHERE user_id = {user_id}"
+    query = f"SELECT user_applications.id, user_id, uin, height, weight, blood_group, diseases, about, qualification, status, start_date, end_date, user_applications.created_at, name as user_name, email as user_email, dob as user_dob FROM user_applications JOIN users ON user_id = users.id WHERE user_id = {user_id} Order By user_applications.created_at desc, user_applications.id desc LIMIT 1"
     cur.execute(query)
     response = cur.fetchall()
     results = helper.format_response(response)
@@ -95,13 +99,17 @@ def get_user_application(user_application_id):
 def create_user(user_obj):
   response = "Null"
   with connection.cursor() as cur:
-    print("Execute Query")
-    query = "INSERT INTO users (name, email, mobile, password, role, token, dob, created_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-    print("---------")
-    print(query)
-    cur.execute(query, (user_obj.get('name'), user_obj.get('email'), user_obj.get('mobile'), user_obj.get('password'), user_obj.get('role'), user_obj.get('token'), user_obj.get('dob'), user_obj.get('created_at')))
-    response = "User Created Successfully"
-  connection.commit()
+    try:
+      print("Execute Query")
+      query = "INSERT INTO users (name, email, mobile, password, role, token, dob, created_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+      print("---------")
+      print(query)
+      cur.execute(query, (user_obj.get('name'), user_obj.get('email'), user_obj.get('mobile'), user_obj.get('password'), user_obj.get('role'), user_obj.get('token'), user_obj.get('dob'), user_obj.get('created_at')))
+      response = "User Created Successfully"
+    except Exception as err:
+      print(err)
+    finally:
+      connection.commit()
   return response
 
 def get_user_by_id(user_id):
@@ -109,7 +117,7 @@ def get_user_by_id(user_id):
   results = []
   with connection.cursor() as cur:
     print("Select Query")
-    query = f"SELECT id, name, email, dob, mobile, token, created_at FROM users WHERE id = {user_id}"
+    query = f"SELECT id, name, email, dob, mobile, token, role, created_at FROM users WHERE id = {user_id}"
     cur.execute(query)
     response = cur.fetchall()
     results = helper.format_user_response(response)
@@ -121,7 +129,8 @@ def get_user_by_email(user_email):
   results = []
   with connection.cursor() as cur:
     print("Select Query")
-    query = f"SELECT id, name, email, dob, mobile, token, created_at FROM users WHERE email = '{user_email}'"
+    query = f"SELECT id, name, email, dob, mobile, token, role, created_at FROM users WHERE email = '{user_email}'"
+    print(query)
     cur.execute(query)
     response = cur.fetchall()
     results = helper.format_user_response(response)
@@ -132,10 +141,10 @@ def update_user(user_obj):
   response = "Null"
   with connection.cursor() as cur:
     print("Execute Query")
-    query = "UPDATE users SET token = %s WHERE email = %s"
+    query = "UPDATE users SET token = %s, mobile = %s, dob = %s WHERE email = %s"
     print("---------")
     print(query)
-    cur.execute(query, (user_obj.get('token'), user_obj.get('email')))
+    cur.execute(query, (user_obj.get('token'), user_obj.get('mobile'), user_obj.get('dob'), user_obj.get('email')))
     response = "User updated Successfully"
   connection.commit()
   return response

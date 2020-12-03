@@ -28,6 +28,6 @@ def format_response(response):
 def format_user_response(response):
   result = ''
   for row in response:
-    t = {'id': row[0], 'name': row[1], 'email': row[2], 'dob': row[3], 'mobile': row[4], 'token': row[5], 'created_at': row[6].strftime("%m/%d/%Y")}
+    t = {'id': row[0], 'name': row[1], 'email': row[2], 'dob': row[3], 'mobile': row[4], 'token': row[5], 'role': row[6], 'created_at': row[7].strftime("%m/%d/%Y")}
     result = t
   return result
