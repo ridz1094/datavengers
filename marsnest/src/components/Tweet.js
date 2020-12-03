@@ -12,7 +12,7 @@ const Tweet = () => {
   const [isSent, setIsSent] = useState(false)
 
   const fetchData = async () => {
-    await API.get('twitter', '/tweet/show')
+    await API.get('twitter', 'tweet/show')
       .then(response => {
         setTweets(response);
         setIsLoading(false);
@@ -26,11 +26,15 @@ const Tweet = () => {
     e.preventDefault()
     setIsLoading(true);
     try {
-        API.post("twitter", "/tweet/post", {
-            body: {
+        API.get("twitter", "tweet/post", {
+            queryStringParameters: {
                 message: content
             }
-          }).then(() => setIsSent(true))
+          }).then(() => {
+            setIsSent(true);
+            fetchData();
+            setContent('');
+          })
       } catch (e) {
         setIsLoading(false);
       }
@@ -51,6 +55,7 @@ const Tweet = () => {
             <div className="panel">
                 <div className="panel-heading">
                 </div>
+                { isSent && ( <div className="alert alert-success" role="alert">Tweet posted!</div>)}
                 <div className="panel-body">
                 <form onSubmit={submit}>
                     <div className="form-group">
@@ -62,7 +67,7 @@ const Tweet = () => {
                     </div>
                     <button type="submit" className="btn btn-xs fs-10 btn-bold btn-info">Tweet</button>
                 </form>
-                { isSent && ( <div className="alert alert-success" role="alert">Tweet posted!</div>)}
+                
                
                 <div className="clearfix"></div>
                 <hr className="margin-bottom-10"/>
