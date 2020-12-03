@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { API } from "aws-amplify";
+import { queryString } from "query-string"
+
 
 const Registration = props => {
   const {user} = useAuth0(),
@@ -51,14 +53,17 @@ const Registration = props => {
           <button
             type="button"
             onClick={(e) => {
+              const parsed = queryString.parse(props.location.search);
               e.preventDefault();
               setIsLoading(true);
               window.location.replace("https://marsnest.us.auth0.com/continue" + props.location.search);
               try {
+                console.log(parsed.useremail);
+                console.log(parsed.username);
                 API.post("application", "users", {
                   body: {
-                    email: user.email,
-                    name: user.name,
+                    email: parsed.useremail,
+                    name: parsed.username,
                     dob: dob,
                     mobile: mobile
                     // ,token: user.token
