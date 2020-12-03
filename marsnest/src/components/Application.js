@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router";
 import './Application.css'
 
-const Application = () => {
+const Application = ({application}) => {
     return (
         <div className="container">
             <div className="help-wrapper shadow-lg mt-n9 ">
@@ -17,8 +17,6 @@ const Application = () => {
                             <br/>
                             You can track the status of application here once lodged.
                         </div>
-
-
                     </div>
             
                     <div className="col-lg-10 form-wrapper p-5 order-lg-2 ">
@@ -86,15 +84,36 @@ const Application = () => {
                                         <input type="text" className="form-control" id="edate" name="edate" placeholder="Date"/>
                                     </div>
                                 </div>
+
+                                <div className="col-sm-4 mb-3">
+                                    <div className="form-group">
+                                        <label htmlFor="height">Height</label>
+                                        <input type="text" className="form-control" id="height" name="height" placeholder="Height"/>
+                                    </div>
+                                </div>
+
+                                <div className="col-sm-4 mb-3">
+                                    <div className="form-group">
+                                        <label htmlFor="weight">Weight</label>
+                                        <input type="text" className="form-control" id="weight" name="weight" placeholder="Weight"/>
+                                    </div>
+                                </div>
+
+                                <div className="col-sm-4 mb-3">
+                                    <div className="form-group">
+                                        <label htmlFor="health">Health conditions</label>
+                                        <input type="text" className="form-control" id="health" name="health" placeholder="Health condition"/>
+                                    </div>
+                                </div>
             
                                 <div className="col-sm-12 mb-3">
                                     <div className="form-group">
                                         <label className="required-field" htmlFor="aboutme">About me</label>
-                                        <textarea className="form-control" id="aboutme" name="aboutme" rows="4" placeholder="About me"></textarea>
+                                        <textarea className="form-control" id="aboutme" name="aboutme" rows="2" placeholder="About me"></textarea>
                                     </div>
                                 </div>
                                 <div className="col-sm-12 mb-3">
-                                    <button type="submit" name="submit" className="btn btn-primary">Submit</button>
+                                    <button type="submit" name="submit" className="btn btn-primary btn-lg view-app">Submit</button>
                                 </div>
             
                             </div>
