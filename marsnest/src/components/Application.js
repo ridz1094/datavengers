@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import './Application.css'
+import './Application.css';
 import { API } from "aws-amplify";
 import Loading from "./Loading";
 
@@ -15,14 +15,20 @@ const Application = () => {
   [bloodGroup, setBloodGroup] = useState(''),
   [startDate, setStartDate] = useState(''),
   [endDate, setEndDate] = useState(''),
-  [address, setAddress] = useState('');
-
+  [address, setAddress] = useState(''),
+  [userdb, setUser] = useState('');
+  
+  var url = "/users/email?email=" + user.email;
+  API.get('application', url)
+    .then(response => {
+        setUser(response.data);
+    })
   const submit = (e) => {
         e.preventDefault()
         setIsLoading(true);
         API.get('application', 'user_application/create',{
         queryStringParameters: {
-          user_id: user.email,
+          user_id: userdb.id,
           uin: uin,
           qualification: qualification,
           about: about,
