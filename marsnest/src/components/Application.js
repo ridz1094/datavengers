@@ -1,32 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import React, { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import './Application.css'
 import { API } from "aws-amplify";
-import history from "../utils/history";
+import Loading from "./Loading";
+
 
 const Application = () => {
-  const {userAuth} = useAuth0(),
+  const {user} = useAuth0(),
   [isLoading, setIsLoading] = useState(false),
   [isSubmitted, setIsSubmitted] = useState(false),
   [uin, setUin] = useState(''),
   [qualification, setQualification] = useState(''),
   [about, setAbout] = useState(''),
-  [bloodGroup, setbloodGroup] = useState(''),
+  [bloodGroup, setBloodGroup] = useState(''),
   [startDate, setStartDate] = useState(''),
   [endDate, setEndDate] = useState(''),
-  [address, setAddress] = useState(''),
-  [user, setUser] = useState('');
-  var url = "/users/email?email=" + "abc13@gmail.com";
-  API.get('application', url)
-    .then(response => {
-        setUser(response.data);
-  })
+  [address, setAddress] = useState('');
 
   const submit = (e) => {
+        e.preventDefault()
+        setIsLoading(true);
         API.get('application', 'user_application/create',{
         queryStringParameters: {
-          user_id: user.id,
+          user_id: user.email,
           uin: uin,
           qualification: qualification,
           about: about,
@@ -38,14 +34,20 @@ const Application = () => {
       }).then(response => {
           setIsLoading(false);
           setIsSubmitted(true);
+          console.log(response)
       })
     .catch(error => {
         console.log(error.response);
     });
-}
+  }
+
+  if (isLoading) {
+    return <Loading />;
+  }
     return (
         <div className="container">
             <p></p>
+            { isSubmitted && ( <div className="alert alert-success" role="alert">Application Submitted!</div>)}
             <div className="help-wrapper shadow-lg mt-n9 ">
                 <div className="row no-gutters">
                     <div className="col-lg-2 help-wrapper gradient-brand-color p-5 order-lg-1 help-box">
@@ -61,9 +63,7 @@ const Application = () => {
                     </div>
                     
                     <div className="col-lg-10 form-wrapper p-5 order-lg-2 ">
-                      <p></p>
-                      { isSubmitted && ( <div className="alert alert-success" role="alert">Application Submitted!</div>)}
-                        <form  onSubmit={submit} className="contact-form form-validate" noValidate="novalidate">
+                        <form  onSubmit={submit} className="contact-form form-validate">
                             <div className="row">
                                 <div className="col-sm-4 mb-3">
                                     <div className="form-group">
@@ -113,7 +113,7 @@ const Application = () => {
                                 <div className="col-sm-4 mb-3">
                                     <div className="form-group">
                                         <label htmlFor="bgroup">Blood group</label>
-                                        <input type="text" className="form-control" id="bgroup" name="bgroup" placeholder="Blood group" value={bloodGroup} onChange={e => { setbloodGroup(e.target.value);}}/>
+                                        <input type="text" className="form-control" id="bgroup" name="bgroup" placeholder="Blood group" value={bloodGroup} onChange={e => { setBloodGroup(e.target.value);}}/>
                                     </div>
                                 </div>
 

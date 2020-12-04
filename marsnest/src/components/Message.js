@@ -43,6 +43,7 @@ const Message = () => {
 
   useEffect(() => {
     fetchData();
+    console.log(user)
   }, []);
 
   if (isLoading) {

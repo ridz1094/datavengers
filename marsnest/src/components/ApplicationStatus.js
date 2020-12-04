@@ -1,5 +1,4 @@
-import React, {useEffect} from "react";
-import { useParams } from "react-router";
+import React from "react";
 import './ApplicationStatus.css'
 import * as Icon from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom'
@@ -16,16 +15,13 @@ const ApplicationStatus = ({application}) => {
           </div>
           <div className="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-secondary">
             <div className="w-100 text-center py-1 px-2">
-                <span className="status-title">Application no</span>
-                 App#
+                <span className="status-title">Application no: {application ? application.id : '###'}</span>
             </div>
             <div className="w-100 text-center py-1 px-2">
-                <span className="status-title">Lodged date</span>
-                 Date#
+                <span className="status-title">Lodged date: {application ? application.created_at : '###'}</span>
             </div>
             <div className="w-100 text-center py-1 px-2">
-                <span className="status-title">Status</span>
-                 Stat
+                <span className="status-title">Status: {application ? application.status : '###'}</span>
             </div>
           </div>
           <div className="card-body">
