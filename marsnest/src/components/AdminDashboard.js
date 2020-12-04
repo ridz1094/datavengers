@@ -24,7 +24,7 @@ const AdminDashboard = () => {
     }
     const updateapplication = (status,id) => {
     console.log(status,id)
-        API.get('twitter', 'user_applications',{
+        API.get('review', 'user_applications',{
             queryStringParameters: {
               status: status,
               id: id

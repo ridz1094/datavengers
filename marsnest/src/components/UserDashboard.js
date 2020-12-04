@@ -11,14 +11,14 @@ const UserDashboard = () => {
   const { userAuth } = useAuth0();
   const [isLoading, setIsLoading] = useState(true);
   const [application, setApplication] = useState();
-  const {user} = history.location.state;
+  // const {user} = history.location.state;
   
   const fetchData = async () => {
-    await API.get('application', 'user/user_applications?user_id='+ user.id)
+    await API.get('application', 'user/user_applications?user_id='+ userAuth.email)
       .then(response => {
         if(response.data.length > 0) {
             setApplication(response.data[0]);
-            console.log(user)
+            // console.log(user)
         }
         setIsLoading(false);
       })

@@ -50,7 +50,7 @@ const NavBar = () => {
     logout({
       returnTo: window.location.origin,
     });
-  // && userFromSys.role == 'admin' &&
+  // && userFromSys.role == 'visitor' &&
   return (
     <div className="nav-container">
       <Navbar color="light" light expand="md">
@@ -70,7 +70,7 @@ const NavBar = () => {
                   Home
                 </NavLink>
               </NavItem>
-              {isAuthenticated && (
+              {isAuthenticated && userFromSys.role == 'visitor' &&(
                 <NavItem>
                   <NavLink
                     tag={RouterNavLink}
@@ -96,7 +96,7 @@ const NavBar = () => {
                   </NavLink>
                 </NavItem>
               )}
-              {isAuthenticated && (
+              {isAuthenticated && userFromSys.role == 'visitor' &&(
                 <NavItem>
                   <NavLink
                     tag={RouterNavLink}
@@ -109,7 +109,7 @@ const NavBar = () => {
                   </NavLink>
                 </NavItem>
               )}
-              {isAuthenticated && (
+              {isAuthenticated && userFromSys.role == 'admin' &&(
                 <NavItem>
                   <NavLink
                     tag={RouterNavLink}

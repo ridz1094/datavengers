@@ -16,24 +16,29 @@ const Application = () => {
   [startDate, setStartDate] = useState(''),
   [endDate, setEndDate] = useState(''),
   [address, setAddress] = useState(''),
-  {user} = history.location.state;
+  [user, setUser] = useState('');
+  var url = "/users/email?email=" + "abc13@gmail.com";
+  API.get('application', url)
+    .then(response => {
+        setUser(response.data);
+  })
 
   const submit = (e) => {
-    API.get('application', 'user_application/create',{
-      queryStringParameters: {
-        user_id: user.id,
-        uin: uin,
-        qualification: qualification,
-        about: about,
-        blood_group: bloodGroup,
-        start_date: startDate,
-        end_date: endDate,
-        address: address
+        API.get('application', 'user_application/create',{
+        queryStringParameters: {
+          user_id: user.id,
+          uin: uin,
+          qualification: qualification,
+          about: about,
+          blood_group: bloodGroup,
+          start_date: startDate,
+          end_date: endDate,
+          address: address
       }
-    }).then(response => {
-        setIsLoading(false);
-        setIsSubmitted(true);
-    })
+      }).then(response => {
+          setIsLoading(false);
+          setIsSubmitted(true);
+      })
     .catch(error => {
         console.log(error.response);
     });

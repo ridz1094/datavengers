@@ -10,6 +10,7 @@ import { Amplify } from 'aws-amplify';
 import base_config from './base_config';
 import application_config from './application_config';
 import twitter_config from './twitter_config';
+import review_config from './review_config';
 
 
 Amplify.configure({
@@ -29,6 +30,11 @@ Amplify.configure({
         name: "twitter",
         endpoint: twitter_config.apiGateway.URL,
         region: twitter_config.apiGateway.REGION
+      },
+      {
+        name: "review",
+        endpoint: review_config.apiGateway.URL,
+        region: review_config.apiGateway.REGION
       },
     ]
   }

@@ -65,12 +65,12 @@ def create_user_applicaitons(user_application_obj):
     connection.commit()
   return response
 
-def show_user_applications(user_id):
+def show_user_applications(user_email):
   response = "Null"
   results = []
   with connection.cursor() as cur:
     print("Select Query")
-    query = f"SELECT user_applications.id, user_id, uin, height, weight, blood_group, diseases, about, qualification, status, start_date, end_date, user_applications.created_at, name as user_name, email as user_email, dob as user_dob FROM user_applications JOIN users ON user_id = users.id WHERE user_id = {user_id} Order By user_applications.created_at desc, user_applications.id desc LIMIT 1"
+    query = f"SELECT user_applications.id, user_id, uin, height, weight, blood_group, diseases, about, qualification, status, start_date, end_date, user_applications.created_at, name as user_name, email as user_email, dob as user_dob FROM user_applications JOIN users ON user_id = users.id WHERE user_email = {user_email} Order By user_applications.created_at desc, user_applications.id desc LIMIT 1"
     print(query)
     cur.execute(query)
     response = cur.fetchall()
