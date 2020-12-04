@@ -81,6 +81,7 @@ if (isLoading) {
                           <div className="custom-control custom-checkbox d-block">
                               
                           </div>
+                          <button className="btn btn-style-1 btn-primary" type="button" data-toast="" data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Update Profile</button>
                       </div>
                   </div>
               </form>

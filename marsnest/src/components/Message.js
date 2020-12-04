@@ -15,13 +15,22 @@ import { API } from "aws-amplify";
 
 const Message = () => {
   
-  const { user } = useAuth0();
+  const { user, getAccessTokenSilently, getAccessTokenWithPopup } = useAuth0();
   const [isLoading, setLoading] = useState(true);
   const [msgs, setMsgs] = useState([]);
 
   const fetchData = async () => {
     var url = "/messages?user_id=" + user.email;
-     API.get('message', url)
+    const token = await getAccessTokenSilently({
+      audience: 'https://marsnest.us.auth0.com/api/v2/',
+      scope: 'read:users',
+    });
+    let options = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      } 
+    }
+     API.get('message', url, options)
       .then(response => {
         setMsgs(response);
         setLoading(false);
