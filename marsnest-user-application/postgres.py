@@ -34,7 +34,7 @@ logger.info("SUCCESS: Connection to RDS MySQL instance succeeded")
 
 # def create_user_table():
 #   with connection.cursor() as cur:
-#     cur.execute("""create table if not exists users (id SERIAL PRIMARY KEY not null, name varchar(50), email varchar(50) not null UNIQUE, mobile integer, password varchar(50), role varchar(50), token varchar(255), dob date, created_at timestamp not null)""")
+#     cur.execute("""create table if not exists users (id SERIAL PRIMARY KEY not null, name varchar(255), email varchar(50) not null UNIQUE, mobile varchar(255), password varchar(255), role varchar(50), token varchar(255), dob date, created_at timestamp not null)""")
 #   connection.commit()
 #   return True
 
@@ -46,18 +46,23 @@ logger.info("SUCCESS: Connection to RDS MySQL instance succeeded")
 
 def create_user_applicaitons(user_application_obj):
   response = "Null"
-  with connection.cursor() as cur:
-    print("Execute Query")
-    query = "INSERT INTO user_applications (user_id, uin, height, weight, blood_group, diseases, about, qualification, status, start_date, end_date, address_text, country, city, state, pincode, created_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-    print("---------")
-    print(user_application_obj)
-    print("---------")
-    print(query)
-    cur.execute(query, (user_application_obj.get('user_id'), user_application_obj.get('uin'), user_application_obj.get('height'), user_application_obj.get('weight'), user_application_obj.get('blood_group'), user_application_obj.get('diseases'), user_application_obj.get('about'), user_application_obj.get('qualification'), user_application_obj.get('status'), user_application_obj.get('start_date'),user_application_obj.get('end_date'),user_application_obj.get('address_text'),user_application_obj.get('country'),user_application_obj.get('city'),user_application_obj.get('state'),user_application_obj.get('pincode'),user_application_obj.get('created_at')))
-    print("---------")
-    print(query)
-    response = "Application Submitted Successfully"
-  connection.commit()
+  try:
+    with connection.cursor() as cur:
+      print("Execute Query")
+      query = "INSERT INTO user_applications (user_id, uin, height, weight, blood_group, diseases, about, qualification, status, start_date, end_date, address_text, country, city, state, pincode, created_at) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"
+      print("---------")
+      print(user_application_obj)
+      print("---------")
+      print(query)
+      print("INSERT INTO user_applications (user_id, uin, height, weight, blood_group, diseases, about, qualification, status, start_date, end_date, address_text, country, city, state, pincode, created_at) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')" % (user_application_obj.get('user_id'), user_application_obj.get('uin'), user_application_obj.get('height'), user_application_obj.get('weight'), user_application_obj.get('blood_group'), user_application_obj.get('diseases'), user_application_obj.get('about'), user_application_obj.get('qualification'), user_application_obj.get('status'), user_application_obj.get('start_date'),user_application_obj.get('end_date'),user_application_obj.get('address_text'),user_application_obj.get('country'),user_application_obj.get('city'),user_application_obj.get('state'),user_application_obj.get('pincode'),user_application_obj.get('created_at')))
+
+      cur.execute("""INSERT INTO user_applications (user_id, uin, height, weight, blood_group, diseases, about, qualification, status, start_date, end_date, address_text, country, city, state, pincode, created_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""", (user_application_obj.get('user_id'), user_application_obj.get('uin'), user_application_obj.get('height'), user_application_obj.get('weight'), user_application_obj.get('blood_group'), user_application_obj.get('diseases'), user_application_obj.get('about'), user_application_obj.get('qualification'), user_application_obj.get('status'), user_application_obj.get('start_date'),user_application_obj.get('end_date'),user_application_obj.get('address_text'),user_application_obj.get('country'),user_application_obj.get('city'),user_application_obj.get('state'),user_application_obj.get('pincode'),user_application_obj.get('created_at')))
+      print("---------")
+      response = "Application Submitted Successfully"
+  except Exception as err:
+    print(err)
+  finally:
+    connection.commit()
   return response
 
 def show_user_applications(user_id):
@@ -66,6 +71,7 @@ def show_user_applications(user_id):
   with connection.cursor() as cur:
     print("Select Query")
     query = f"SELECT user_applications.id, user_id, uin, height, weight, blood_group, diseases, about, qualification, status, start_date, end_date, user_applications.created_at, name as user_name, email as user_email, dob as user_dob FROM user_applications JOIN users ON user_id = users.id WHERE user_id = {user_id} Order By user_applications.created_at desc, user_applications.id desc LIMIT 1"
+    print(query)
     cur.execute(query)
     response = cur.fetchall()
     results = helper.format_response(response)
@@ -98,18 +104,19 @@ def get_user_application(user_application_id):
 
 def create_user(user_obj):
   response = "Null"
-  with connection.cursor() as cur:
-    try:
+  try:
+    with connection.cursor() as cur:
       print("Execute Query")
-      query = "INSERT INTO users (name, email, mobile, password, role, token, dob, created_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+      query = "INSERT INTO users (name, email, mobile, role, dob, created_at) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')" % (user_obj.get('name'), user_obj.get('email'), user_obj.get('mobile'), user_obj.get('role'), user_obj.get('dob'), user_obj.get('created_at'))
       print("---------")
       print(query)
-      cur.execute(query, (user_obj.get('name'), user_obj.get('email'), user_obj.get('mobile'), user_obj.get('password'), user_obj.get('role'), user_obj.get('token'), user_obj.get('dob'), user_obj.get('created_at')))
+      cur.execute("""INSERT INTO users (name, email, mobile, role, dob, created_at) VALUES (%s, %s, %s, %s, %s, %s)""",(user_obj.get('name'), user_obj.get('email'), user_obj.get('mobile'), user_obj.get('role'), user_obj.get('dob'), user_obj.get('created_at')))
       response = "User Created Successfully"
-    except Exception as err:
-      print(err)
-    finally:
-      connection.commit()
+      print(response)
+  except Exception as err:
+    print(err)
+  finally:
+    connection.commit()
   return response
 
 def get_user_by_id(user_id):
@@ -129,8 +136,9 @@ def get_user_by_email(user_email):
   results = []
   with connection.cursor() as cur:
     print("Select Query")
-    query = f"SELECT id, name, email, dob, mobile, token, role, created_at FROM users WHERE email = '{user_email}'"
+    query = "SELECT id, name, email, dob, mobile, token, role, created_at FROM users WHERE email = '%s'" % user_email
     print(query)
+    print(user_email)
     cur.execute(query)
     response = cur.fetchall()
     results = helper.format_user_response(response)
@@ -144,7 +152,7 @@ def update_user(user_obj):
     query = "UPDATE users SET token = %s, mobile = %s, dob = %s WHERE email = %s"
     print("---------")
     print(query)
-    cur.execute(query, (user_obj.get('token'), user_obj.get('mobile'), user_obj.get('dob'), user_obj.get('email')))
+    cur.execute("""UPDATE users SET token = %s, mobile = %s, dob = %s WHERE email = %s""", (user_obj.get('token'), user_obj.get('mobile'), user_obj.get('dob'), user_obj.get('email')))
     response = "User updated Successfully"
   connection.commit()
   return response

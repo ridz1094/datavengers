@@ -1,0 +1,34 @@
+# export AWS_ACCESS_KEY_ID=AKIA3RL2X62ZCFO46JO2
+# export AWS_SECRET_ACCESS_KEY=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
+
+
+service: marsnes-twitter-api
+
+provider:
+  name: aws
+  runtime: python3.6
+  stage: dev
+  region: us-east-1
+  environment:
+    CONSUMER_KEY: R84A3vsG8fMMAO4btiEehPWQD
+    CONSUMER_SECRET: ihfi2Axa00tLB7S7mrZ3DBKWg3XwP6me5kBHU4WO2hLgJHnM42
+    ACCESS_TOKEN: 1309472982234849280-IAjX1txVzaNEq5mdXXPrYmg7gxAszm
+    ACCESS_TOKEN_SECRET: DMoAX5ou8eOhKyjSpeaMrAvxIbJvBGz1jYJvxx4631LBx
+
+functions:
+  postTweet:
+    handler: handler.postTweet
+    events:
+      - http: 'GET /tweet/post'
+  displayTweet:
+    handler: handler.displayTweet
+    events:
+      - http: 'GET /tweet/show'
+  deleteTweet:
+    handler: handler.deleteTweet
+    events:
+      - http: 'DELETE /tweet/remove'
+  searchTweet:
+    handler: handler.searchTweet
+    events:
+      - http: 'GET /tweet/search'
