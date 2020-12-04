@@ -14,7 +14,7 @@ const UserDashboard = () => {
   // const {user} = history.location.state;
   
   const fetchData = async () => {
-    await API.get('application', 'user/user_applications?user_id='+ user.email)
+    await API.get('application', 'user/user_applications?email='+ user.email)
       .then(response => {
         if(response.data.length > 0) {
             setApplication(response.data[0]);
