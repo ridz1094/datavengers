@@ -12,10 +12,12 @@ const UserDashboard = () => {
   const [application, setApplication] = useState();
   
   const fetchData = async () => {
-    await API.get('application', 'user_applications?user_id'+ user.id)
+    await API.get('application', 'user_applications?user_id='+ 1) // change
       .then(response => {
-        setApplication(response.data[0]);
-        console.log(response.data[0]);
+        if(response.data.length > 0) {
+            setApplication(response.data[0]);
+            console.log(user)
+        }
         setIsLoading(false);
       })
       .catch(error => {
@@ -32,11 +34,7 @@ const UserDashboard = () => {
     return <Loading />;
   }
 
-  if(application.status === 'Pending'){
-    return <ApplicationStatus application={application}/>
-  } else {
-    return <Application/>
-  }
+  return <ApplicationStatus application={application}/>
 }
 
 export default UserDashboard;

@@ -25,6 +25,7 @@ const Message = () => {
       .then(response => {
         setMsgs(response);
         setLoading(false);
+        console.log(user.email)
       })
       .catch(error => {
         console.log(error.response);

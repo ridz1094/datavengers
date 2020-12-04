@@ -25,7 +25,10 @@ const ComposeMail = () => {
                     subject: subject,
                     message: content
                 }
-              }).then(() => setIsSent(true))
+              }).then(() => {
+                  setIsSent(true)
+                  setIsLoading(false)
+              })
           } catch (e) {
             setIsLoading(false);
           }

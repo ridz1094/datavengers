@@ -13,6 +13,8 @@ import Message from "./views/Message";
 import { useAuth0 } from "@auth0/auth0-react";
 import history from "./utils/history";
 import Tweet from "./components/Tweet"
+import Application from "./components/Application"
+
 
 // styles
 import "./App.css";
@@ -46,6 +48,7 @@ const App = () => {
             <Route path="/compose" component={Message} />
             <Route path="/admindash" component={AdminDashboard} />
             <Route path="/userdash" component={UserDashboard} />
+            <Route path="/application" component={Application} />
             <Route path="/tweet" component={Tweet}/>
           </Switch>
         </Container>

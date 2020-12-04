@@ -65,6 +65,7 @@ const NavBar = () => {
                   to="/"
                   exact
                   activeClassName="router-link-exact-active"
+                  className="font-weight-bold text-muted"
                 >
                   Home
                 </NavLink>
@@ -76,6 +77,7 @@ const NavBar = () => {
                     to="/message"
                     exact
                     activeClassName="router-link-exact-active"
+                    className="font-weight-bold text-muted"
                   >
                     Message
                   </NavLink>
@@ -88,6 +90,7 @@ const NavBar = () => {
                     to="/admindash"
                     exact
                     activeClassName="router-link-exact-active"
+                    className="font-weight-bold text-muted"
                   >
                     Admin Dashboard
                   </NavLink>
@@ -100,6 +103,7 @@ const NavBar = () => {
                     to="/userdash"
                     exact
                     activeClassName="router-link-exact-active"
+                    className="font-weight-bold text-muted"
                   >
                     My Application
                   </NavLink>
@@ -112,6 +116,7 @@ const NavBar = () => {
                     to="/tweet"
                     exact
                     activeClassName="router-link-exact-active"
+                    className="font-weight-bold text-muted"
                   >
                     Tweet your journey!
                   </NavLink>

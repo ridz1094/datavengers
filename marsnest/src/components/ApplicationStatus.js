@@ -1,64 +1,77 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useParams } from "react-router";
 import './ApplicationStatus.css'
 import * as Icon from 'react-bootstrap-icons';
+import { Link } from 'react-router-dom'
 
 
 const ApplicationStatus = ({application}) => {
+
     return (
 
-    <div class="container padding-bottom-3x mb-1">
-        <div class="card mb-3">
-          <div class="p-4 text-center gradient-brand-color help-box rounded-top">
-            <span class="font-weight-bold">My Application</span>
+    <div className="container padding-bottom-3x mb-1">
+        <div className="card mb-3">
+          <div className="p-4 text-center gradient-brand-color help-box rounded-top">
+            <span className="font-weight-bold">My Application</span>
           </div>
-          <div class="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-secondary">
-            <div class="w-100 text-center py-1 px-2"><span class="status-title">Application no</span> App#</div>
-            <div class="w-100 text-center py-1 px-2"><span class="status-title">Lodged date</span> Date#</div>
-            <div class="w-100 text-center py-1 px-2"><span class="status-title">Status</span> Stat</div>
+          <div className="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-secondary">
+            <div className="w-100 text-center py-1 px-2">
+                <span className="status-title">Application no</span>
+                 App#
+            </div>
+            <div className="w-100 text-center py-1 px-2">
+                <span className="status-title">Lodged date</span>
+                 Date#
+            </div>
+            <div className="w-100 text-center py-1 px-2">
+                <span className="status-title">Status</span>
+                 Stat
+            </div>
           </div>
-          <div class="card-body">
-            <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
-              <div class="step completed">
-                <div class="step-icon-wrap">
-                  <div class="step-icon"><Icon.Person /></div>
+          <div className="card-body">
+            <div className="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
+              <div className="step completed">
+                <div className="step-icon-wrap">
+                  <div className="step-icon"><Icon.Person /></div>
                 </div>
-                <h4 class="step-title">Sign up</h4>
+                <h4 className="step-title">Sign up</h4>
               </div>
-              <div class="step completed">
-                <div class="step-icon-wrap">
-                  <div class="step-icon"><Icon.FileEarmarkText /></div>
+              <div className={application ? 'step completed' : 'step'}>
+                <div className="step-icon-wrap">
+                  <div className="step-icon"><Icon.FileEarmarkText /></div>
                 </div>
-                <h4 class="step-title">Lodge Application</h4>
+                <h4 className="step-title">Lodge Application</h4>
               </div>
-              <div class="step completed">
-                <div class="step-icon-wrap">
-                  <div class="step-icon"><Icon.Clock /></div>
+              <div className={application ? 'step completed' : 'step'}>
+                <div className="step-icon-wrap">
+                  <div className="step-icon">
+                    {application && application.status === 'Pending'? <Icon.Clock /> : <Icon.CheckCircle />}
+                  </div>
                 </div>
-                <h4 class="step-title">Pending</h4>
+                <h4 className="step-title">
+                    {application && application.status === 'Pending'? 'Pending' : 'Application approved'}
+                </h4>
               </div>
-              <div class="step completed">
-                <div class="step-icon-wrap">
-                  <div class="step-icon"><Icon.CheckCircle/></div>
+              <div className="step">
+                <div className="step-icon-wrap">
+                  <div className="step-icon"><Icon.ShieldPlus/></div>
                 </div>
-                <h4 class="step-title">Application approval</h4>
+                <h4 className="step-title">Health exam</h4>
               </div>
-              <div class="step">
-                <div class="step-icon-wrap">
-                  <div class="step-icon"><Icon.ShieldFillPlus/></div>
+              <div className="step">
+                <div className="step-icon-wrap">
+                  <div className="step-icon"><Icon.Cursor/></div>
                 </div>
-                <h4 class="step-title">Health exam</h4>
-              </div>
-              <div class="step">
-                <div class="step-icon-wrap">
-                  <div class="step-icon"><Icon.CursorFill/></div>
-                </div>
-                <h4 class="step-title">Ready set go!</h4>
+                <h4 className="step-title">Ready set go!</h4>
               </div>
             </div>
           </div>
-          <div class="p-4 d-flex justify-content-center ">
-            <button class="btn btn-primary btn-lg view-app">View Application</button> 
+          <div className="p-4 d-flex justify-content-center ">
+            <Link to='/application'>
+                <button className="btn btn-primary btn-lg view-app">
+                    {application ? 'View Application' : 'Lodge Application'}
+                </button> 
+            </Link>
           </div>
           <br/><br/>
         </div>
