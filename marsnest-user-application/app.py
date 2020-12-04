@@ -160,7 +160,7 @@ def createUser(event, context):
     token = event["queryStringParameters"]["token"] if 'token' in event["queryStringParameters"] else None
     dob = event["queryStringParameters"]["dob"] if 'dob' in event["queryStringParameters"] else None
     user_role = role.Role.visitor.name
-    user = {"name": name, "email": email, "mobile": mobile, "password": password, "role": user_role, "token": token, "created_at": date.today()}
+    user = {"name": name, "email": email, "mobile": mobile, "password": password, "role": user_role, "token": token, "created_at": date.today(), "dob": dob}
     print(user)
     pg.create_user(user)
     result = {"message": "User Created Successfully"}
