@@ -6,7 +6,7 @@ import { API } from "aws-amplify";
 import history from "../utils/history";
 
 const Application = () => {
-  const {userAuth} = useAuth0(),
+  const {user} = useAuth0(),
   [isLoading, setIsLoading] = useState(false),
   [isSubmitted, setIsSubmitted] = useState(false),
   [uin, setUin] = useState(''),
@@ -16,8 +16,8 @@ const Application = () => {
   [startDate, setStartDate] = useState(''),
   [endDate, setEndDate] = useState(''),
   [address, setAddress] = useState(''),
-  [user, setUser] = useState('');
-  var url = "/users/email?email=" + "abc13@gmail.com";
+  [userdb, setUser] = useState('');
+  var url = "/users/email?email=" + user.email;
   API.get('application', url)
     .then(response => {
         setUser(response.data);
@@ -26,7 +26,7 @@ const Application = () => {
   const submit = (e) => {
         API.get('application', 'user_application/create',{
         queryStringParameters: {
-          user_id: user.id,
+          user_id: userdb.id,
           uin: uin,
           qualification: qualification,
           about: about,
@@ -68,7 +68,7 @@ const Application = () => {
                                 <div className="col-sm-4 mb-3">
                                     <div className="form-group">
                                         <label className="required-field" htmlFor="name">Name</label>
-                                        <input type="text" className="form-control" id="name" name="name" placeholder="Name" value={user.name} 
+                                        <input type="text" className="form-control" id="name" name="name" placeholder="Name" value={userdb.name} 
                                         readOnly/>
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@ const Application = () => {
                                 <div className="col-sm-4 mb-3">
                                     <div className="form-group">
                                         <label className="required-field" htmlFor="email">Email</label>
-                                        <input type="text" className="form-control" id="email" name="email" placeholder="Email" value={user.email} 
+                                        <input type="text" className="form-control" id="email" name="email" placeholder="Email" value={userdb.email} 
                                         readOnly/>
                                     </div>
                                 </div>
@@ -84,7 +84,7 @@ const Application = () => {
                                 <div className="col-sm-4 mb-3">
                                     <div className="form-group">
                                         <label htmlFor="phone">Phone Number</label>
-                                        <input type="number" className="form-control" id="phone" name="phone" placeholder="Phone no" value={user.mobile} 
+                                        <input type="number" className="form-control" id="phone" name="phone" placeholder="Phone no" value={userdb.mobile} 
                                         readOnly/>
                                     </div>
                                 </div>
