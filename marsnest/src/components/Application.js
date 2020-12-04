@@ -68,7 +68,7 @@ const Application = () => {
                                 <div className="col-sm-4 mb-3">
                                     <div className="form-group">
                                         <label className="required-field" htmlFor="name">Name</label>
-                                        <input type="text" className="form-control" id="name" name="name" placeholder="Name" value={user.name} 
+                                        <input type="text" className="form-control" id="name" name="name" placeholder="Name" value={userdb.name} 
                                         readOnly/>
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@ const Application = () => {
                                 <div className="col-sm-4 mb-3">
                                     <div className="form-group">
                                         <label className="required-field" htmlFor="email">Email</label>
-                                        <input type="text" className="form-control" id="email" name="email" placeholder="Email" value={user.email} 
+                                        <input type="text" className="form-control" id="email" name="email" placeholder="Email" value={userdb.email} 
                                         readOnly/>
                                     </div>
                                 </div>
@@ -84,7 +84,7 @@ const Application = () => {
                                 <div className="col-sm-4 mb-3">
                                     <div className="form-group">
                                         <label htmlFor="phone">Phone Number</label>
-                                        <input type="number" className="form-control" id="phone" name="phone" placeholder="Phone no" value={user.mobile} 
+                                        <input type="number" className="form-control" id="phone" name="phone" placeholder="Phone no" value={userdb.mobile} 
                                         readOnly/>
                                     </div>
                                 </div>
