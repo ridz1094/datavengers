@@ -4,15 +4,17 @@ import ApplicationStatus from "./ApplicationStatus";
 import { API } from "aws-amplify";
 import Loading from "./Loading";
 import { useAuth0 } from "@auth0/auth0-react";
+import history from "../utils/history";
 
 
 const UserDashboard = () => {
-  const { user } = useAuth0();
+  const { userAuth } = useAuth0();
   const [isLoading, setIsLoading] = useState(true);
   const [application, setApplication] = useState();
+  const {user} = history.location.state;
   
   const fetchData = async () => {
-    await API.get('application', 'user_applications?user_id='+ 1) // change
+    await API.get('application', 'user/user_applications?user_id='+ user.id)
       .then(response => {
         if(response.data.length > 0) {
             setApplication(response.data[0]);

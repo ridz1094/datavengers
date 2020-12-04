@@ -53,22 +53,22 @@ const Registration = props => {
           <button
             type="button"
             onClick={(e) => {
+              const queryString = require('query-string');
               const parsed = queryString.parse(props.location.search);
               e.preventDefault();
               setIsLoading(true);
-              window.location.replace("https://marsnest.us.auth0.com/continue" + props.location.search);
               try {
                 console.log(parsed.useremail);
                 console.log(parsed.username);
-                API.post("application", "users", {
-                  body: {
+                API.get("application", "users", {
+                  queryStringParameters: {
                     email: parsed.useremail,
                     name: parsed.username,
                     dob: dob,
                     mobile: mobile
-                    // ,token: user.token
                   }
                 }).then(() => {
+                  window.location.replace("https://marsnest.us.auth0.com/continue" + props.location.search);
                   console.log("on click-----")
                   setIsRegistered(true)
                   

@@ -22,7 +22,21 @@ const AdminDashboard = () => {
             console.log(error.response);
         });
     }
-
+    const updateapplication = (status,id) => {
+    console.log(status,id)
+        API.get('twitter', 'user_applications',{
+            queryStringParameters: {
+              status: status,
+              id: id
+            }})
+        .then(response => {
+            fetchData();
+            setLoading(false);
+        })
+        .catch(error => {
+            console.log(error.response);
+        });
+    }
     useEffect(() => {
         fetchData();
     }, []);
@@ -62,8 +76,9 @@ const AdminDashboard = () => {
                                     className="btn btn-xs fs-10 btn-bold btn-info" 
                                     onClick={() => {setCurrentApplication(application)}}>
                                     View Details</button>
-                                <button className="btn btn-xs fs-10 btn-bold btn-primary">Approve</button>
-                                <button className="btn btn-xs fs-10 btn-bold btn-warning" >Reject</button>
+                                <button className="btn btn-xs fs-10 btn-bold btn-primary" onClick={() => updateapplication('Approved',application.id)}
+>Approve</button>
+                                <button className="btn btn-xs fs-10 btn-bold btn-warning" onClick={() => updateapplication('Rejected',application.id)}>Reject</button>
                             </div>
                         </footer>
                     </div>

@@ -32,25 +32,40 @@ def createUserApplication(event, context):
   statusCode = 200
   result = {}
   try:
-    user_application_params = json.loads(event["body"])
+    user_id = event["queryStringParameters"]["user_id"] if 'user_id' in event["queryStringParameters"] else None
+    uin = event["queryStringParameters"]["uin"] if 'uin' in event["queryStringParameters"] else None
+    start_date = event["queryStringParameters"]["start_date"] if 'start_date' in event["queryStringParameters"] else None
+    end_date = event["queryStringParameters"]["end_date"] if 'end_date' in event["queryStringParameters"] else None
+    height = event["queryStringParameters"]["height"] if 'height' in event["queryStringParameters"] else None
+    weight = event["queryStringParameters"]["weight"] if 'weight' in event["queryStringParameters"] else None
+    blood_group = event["queryStringParameters"]["blood_group"] if 'blood_group' in event["queryStringParameters"] else None
+    about = event["queryStringParameters"]["about"] if 'about' in event["queryStringParameters"] else None
+    diseases = event["queryStringParameters"]["diseases"] if 'diseases' in event["queryStringParameters"] else None
+    qualification = event["queryStringParameters"]["qualification"] if 'qualification' in event["queryStringParameters"] else None
+    address = event["queryStringParameters"]["address"] if 'address' in event["queryStringParameters"] else None
+    country = event["queryStringParameters"]["country"] if 'country' in event["queryStringParameters"] else None
+    city = event["queryStringParameters"]["city"] if 'city' in event["queryStringParameters"] else None
+    state = event["queryStringParameters"]["state"] if 'state' in event["queryStringParameters"] else None
+    pincode = event["queryStringParameters"]["pincode"] if 'pincode' in event["queryStringParameters"] else None
+    # user_application_params = json.loads(event["body"])
     # user_application_params = request.json
-    user_id = user_application_params.get("user_id")
-    uin = user_application_params.get("uin")
-    start_date = user_application_params.get("start_date")
-    end_date = user_application_params.get("end_date")
-    height = user_application_params.get("height")
-    weight = user_application_params.get("weight")
-    blood_group = user_application_params.get("blood_group")
-    about = user_application_params.get("about")
-    diseases = user_application_params.get("diseases")
-    qualification = user_application_params.get("qualification")
-    address_text = user_application_params.get("address_text")
-    country = user_application_params.get("country")
-    city = user_application_params.get("city")
-    state = user_application_params.get("state")
-    pincode = user_application_params.get("pincode")
+    # user_id = user_application_params.get("user_id")
+    # uin = user_application_params.get("uin")
+    # start_date = user_application_params.get("start_date")
+    # end_date = user_application_params.get("end_date")
+    # height = user_application_params.get("height")
+    # weight = user_application_params.get("weight")
+    # blood_group = user_application_params.get("blood_group")
+    # about = user_application_params.get("about")
+    # diseases = user_application_params.get("diseases")
+    # qualification = user_application_params.get("qualification")
+    # address_text = user_application_params.get("address_text")
+    # country = user_application_params.get("country")
+    # city = user_application_params.get("city")
+    # state = user_application_params.get("state")
+    # pincode = user_application_params.get("pincode")
     
-    user_application = {"user_id": user_id, "uin": uin, "status": status.Status.Pending.name, "start_date": start_date, "end_date": end_date, "created_at": date.today(), "height": height, "weight": weight, "qualification": qualification, "about": about, "diseases": diseases, "blood_group": blood_group, "address_text": address_text, "country": country, "city": city, "state": state, "pincode": pincode}
+    user_application = {"user_id": user_id, "uin": uin, "status": status.Status.Pending.name, "start_date": start_date, "end_date": end_date, "created_at": date.today(), "height": height, "weight": weight, "qualification": qualification, "about": about, "diseases": diseases, "blood_group": blood_group, "address_text": address, "country": country, "city": city, "state": state, "pincode": pincode}
     
     pg.create_user_applicaitons(user_application)
     result = {"message": "Application Submitted Successfully"}
@@ -133,23 +148,19 @@ def getUserApplication(event, context):
     "isBase64Encoded": False
   }
 
-# @app.route("/users", methods=["POST"])
+# @app.route("/users", methods=["GET"])
 def createUser(event, context):
   statusCode = 200
   result = {}
   try:
-    breakpoint()
-    user_params = json.loads(event["body"])
-    # user_params = request.json
-    name = user_params.get("name")
-    email = user_params.get("email")
-    mobile = user_params.get("mobile")
-    password = user_params.get("password")
+    name = event["queryStringParameters"]["name"] if 'name' in event["queryStringParameters"] else None
+    email = parse.unquote(event["queryStringParameters"]["email"]) if 'email' in event["queryStringParameters"] else None
+    mobile = event["queryStringParameters"]["mobile"] if 'mobile' in event["queryStringParameters"] else None
+    password = event["queryStringParameters"]["password"] if 'password' in event["queryStringParameters"] else None
+    token = event["queryStringParameters"]["token"] if 'token' in event["queryStringParameters"] else None
+    dob = event["queryStringParameters"]["dob"] if 'dob' in event["queryStringParameters"] else None
     user_role = role.Role.visitor.name
-    token = user_params.get("token")
-    dob = user_params.get("dob")
-
-    user = {"name": name, "email": email, "mobile": mobile, "password": password, "role": user_role, "token": token, "created_at": date.today()}
+    user = {"name": name, "email": email, "mobile": mobile, "password": password, "role": user_role, "token": token, "created_at": date.today(), "dob": dob}
     print(user)
     pg.create_user(user)
     result = {"message": "User Created Successfully"}
@@ -195,6 +206,7 @@ def getUserByEmail(event, context):
   result = {}
   try:
     email = parse.unquote(event["queryStringParameters"]["email"])
+    print(email)
     result = {"data": pg.get_user_by_email(email)}
   except:
     statusCode = 400
@@ -216,12 +228,13 @@ def updateUser(event, context):
   statusCode = 201
   result = {}
   try:
-    user_params = json.loads(event["body"])
-    # user_params = request.json
-    token = user_params.get("token")
-    email = user_params.get("email")
+    email = parse.unquote(event["queryStringParameters"]["email"]) if 'email' in event["queryStringParameters"] else None
+    mobile = event["queryStringParameters"]["mobile"] if 'mobile' in event["queryStringParameters"] else None
+    password = event["queryStringParameters"]["password"] if 'password' in event["queryStringParameters"] else None
+    token = event["queryStringParameters"]["token"] if 'token' in event["queryStringParameters"] else None
+    dob = event["queryStringParameters"]["dob"] if 'dob' in event["queryStringParameters"] else None
 
-    user = {"token": token, "email": email}
+    user = {"token": token, "email": email, "dob": dob, "mobile": mobile}
     print(user)
     pg.update_user(user)
     result = {"message": "User Updated Successfully"}

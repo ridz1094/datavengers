@@ -1,0 +1,34 @@
+# serverless.yml
+
+service: marsnest-user-application-api
+
+plugins:
+  - serverless-python-requirements
+  - serverless-wsgi
+
+custom:
+  wsgi:
+    app: userapp.app
+    packRequirements: false
+  pythonRequirements:
+    dockerizePip: non-linux
+
+provider:
+  name: aws
+  runtime: python3.6
+  stage: dev
+  region: ap-south-1
+  environment:
+    USERS_TABLE: 'users'
+    USERS_APPLICATION_TABLE: 'user_applications'
+  
+
+functions:
+  main:
+    handler: userapp.main
+    events:
+      - http: 'GET /'
+  updateUserApplications:
+    handler: userapp.updateUserApplications
+    events:
+      - http: 'GET /user_applications'

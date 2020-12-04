@@ -21,13 +21,13 @@ def extract_user_application_object(user_application_params):
 def format_response(response):
   results = []
   for row in response:
-    t = {'id': row[0], 'user_id': row[1], 'uin': row[2], 'height': row[3], 'weight': row[4], 'blood_group': row[5], 'diseases': row[6], 'about': row[7], 'qualification': row[8], 'status': row[9], 'start_date': row[10].strftime("%m/%d/%Y"), 'end_date': row[11].strftime("%m/%d/%Y"), 'created_at': row[12].strftime("%m/%d/%Y"), 'user_name': row[13], 'user_email': row[14], 'user_dob': row[15]}
+    t = {'id': row[0], 'user_id': row[1], 'uin': row[2], 'height': row[3], 'weight': row[4], 'blood_group': row[5], 'diseases': row[6], 'about': row[7], 'qualification': row[8], 'status': row[9], 'start_date': row[10].strftime("%m/%d/%Y"), 'end_date': row[11].strftime("%m/%d/%Y"), 'created_at': row[12].strftime("%m/%d/%Y"), 'user_name': row[13], 'user_email': row[14], 'user_dob': row[15].strftime("%m/%d/%Y")}
     results.append(t)
   return results
 
 def format_user_response(response):
   result = ''
   for row in response:
-    t = {'id': row[0], 'name': row[1], 'email': row[2], 'dob': row[3], 'mobile': row[4], 'token': row[5], 'created_at': row[6].strftime("%m/%d/%Y")}
+    t = {'id': row[0], 'name': row[1], 'email': row[2], 'dob': row[3].strftime("%m/%d/%Y"), 'mobile': row[4], 'token': row[5], 'role': row[6], 'created_at': row[7].strftime("%m/%d/%Y")}
     result = t
   return result
