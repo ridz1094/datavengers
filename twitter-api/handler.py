@@ -15,7 +15,6 @@ def postTweet(event, context):
     print(e)
     statusCode = 400
     result = ''
-
   response = {
     "statusCode": statusCode,
     "body": json.dumps(result),
@@ -39,7 +38,7 @@ def displayTweet(event, context):
     result = handle_exception(e)
   response = {
     "statusCode": statusCode,
-    "body": json.dumps(result),
+    "body": result,
     "headers": {
         'Access-Control-Allow-Headers': 'Content-Type',
         'Access-Control-Allow-Origin': '*',
@@ -75,13 +74,13 @@ def searchTweet(event, context):
     statusCode = 200
     result = {}
     try:
-        result = tweet_auth.get_api().user_timeline(event["queryStringParameters"]["keyword"])
+      result = tweet_auth.get_api().user_timeline(event["queryStringParameters"]["keyword"])
     except tweepy.TweepError as e:
-        statusCode = 400
-        result = handle_exception(e)
+      statusCode = 400
+      result = {"error": handle_exception(e)}
     response = {
       "statusCode": statusCode,
-      "body": json.dumps(result),
+      "body": result,
       "headers": {
         'Access-Control-Allow-Headers': 'Content-Type',
         'Access-Control-Allow-Origin': '*',

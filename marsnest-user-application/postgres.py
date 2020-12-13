@@ -70,7 +70,7 @@ def show_user_applications(user_email):
   results = []
   with connection.cursor() as cur:
     print("Select Query")
-    query = f"SELECT user_applications.id, user_id, uin, height, weight, blood_group, diseases, about, qualification, status, start_date, end_date, user_applications.created_at, name as user_name, email as user_email, dob as user_dob FROM user_applications JOIN users ON user_id = users.id WHERE user_email = {user_email} Order By user_applications.created_at desc, user_applications.id desc LIMIT 1"
+    query = f"SELECT user_applications.id, user_id, uin, height, weight, blood_group, diseases, about, qualification, status, start_date, end_date, user_applications.created_at, name as user_name, email as user_email, dob as user_dob FROM user_applications JOIN users ON user_id = users.id WHERE email = '{user_email}' Order By user_applications.created_at desc, user_applications.id desc LIMIT 1"
     print(query)
     cur.execute(query)
     response = cur.fetchall()
@@ -95,7 +95,7 @@ def get_user_application(user_application_id):
   results = []
   with connection.cursor() as cur:
     print("Select Query")
-    query = f"SELECT id, user_id, uin, height, weight, blood_group, diseases, about, qualification, status, start_date, end_date, created_at FROM user_applications WHERE id = {user_application_id}"
+    query = f"SELECT user_applications.id, user_id, uin, height, weight, blood_group, diseases, about, qualification, status, start_date, end_date, user_applications.created_at, name as user_name, email as user_email, dob as user_dob FROM user_applications JOIN users ON user_id = users.id WHERE user_applications.id = {user_application_id}"
     cur.execute(query)
     response = cur.fetchall()
     results = helper.format_response(response)
@@ -107,10 +107,10 @@ def create_user(user_obj):
   try:
     with connection.cursor() as cur:
       print("Execute Query")
-      query = "INSERT INTO users (name, email, mobile, role, dob, created_at) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')" % (user_obj.get('name'), user_obj.get('email'), user_obj.get('mobile'), user_obj.get('role'), user_obj.get('dob'), user_obj.get('created_at'))
+      query = "INSERT INTO users (name, email, mobile, role, dob, token, created_at) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')" % (user_obj.get('name'), user_obj.get('email'), user_obj.get('mobile'), user_obj.get('role'), user_obj.get('dob'), user_obj.get('token'), user_obj.get('created_at'))
       print("---------")
       print(query)
-      cur.execute("""INSERT INTO users (name, email, mobile, role, dob, created_at) VALUES (%s, %s, %s, %s, %s, %s)""",(user_obj.get('name'), user_obj.get('email'), user_obj.get('mobile'), user_obj.get('role'), user_obj.get('dob'), user_obj.get('created_at')))
+      cur.execute("""INSERT INTO users (name, email, mobile, role, dob, token, created_at) VALUES (%s, %s, %s, %s, %s, %s)""",(user_obj.get('name'), user_obj.get('email'), user_obj.get('mobile'), user_obj.get('role'), user_obj.get('dob'),user_obj.get('token'), user_obj.get('created_at')))
       response = "User Created Successfully"
       print(response)
   except Exception as err:

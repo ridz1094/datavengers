@@ -47,23 +47,6 @@ def createUserApplication(event, context):
     city = event["queryStringParameters"]["city"] if 'city' in event["queryStringParameters"] else None
     state = event["queryStringParameters"]["state"] if 'state' in event["queryStringParameters"] else None
     pincode = event["queryStringParameters"]["pincode"] if 'pincode' in event["queryStringParameters"] else None
-    # user_application_params = json.loads(event["body"])
-    # user_application_params = request.json
-    # user_id = user_application_params.get("user_id")
-    # uin = user_application_params.get("uin")
-    # start_date = user_application_params.get("start_date")
-    # end_date = user_application_params.get("end_date")
-    # height = user_application_params.get("height")
-    # weight = user_application_params.get("weight")
-    # blood_group = user_application_params.get("blood_group")
-    # about = user_application_params.get("about")
-    # diseases = user_application_params.get("diseases")
-    # qualification = user_application_params.get("qualification")
-    # address_text = user_application_params.get("address_text")
-    # country = user_application_params.get("country")
-    # city = user_application_params.get("city")
-    # state = user_application_params.get("state")
-    # pincode = user_application_params.get("pincode")
     
     user_application = {"user_id": user_id, "uin": uin, "status": status.Status.Pending.name, "start_date": start_date, "end_date": end_date, "created_at": date.today(), "height": height, "weight": weight, "qualification": qualification, "about": about, "diseases": diseases, "blood_group": blood_group, "address_text": address, "country": country, "city": city, "state": state, "pincode": pincode}
     
@@ -89,7 +72,8 @@ def showUserApplications(event, context):
   statusCode = 200
   result = {}
   try:
-    result = {"data": pg.show_user_applications(event["queryStringParameters"]["user_id"])}
+    email = parse.unquote(event["queryStringParameters"]["email"]) if 'email' in event["queryStringParameters"] else None
+    result = {"data": pg.show_user_applications(email)}
   except:
     statusCode = 400
     result = {"error": "Error while fetching records of user application"}
